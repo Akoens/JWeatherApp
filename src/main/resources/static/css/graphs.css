@@ -1,0 +1,22 @@
+.row {
+    margin-bottom: 360px;
+    margin-left: 35px;
+}
+
+.define {
+    color: white;
+    font-size: 25px;
+}
+
+.variable {
+    color: teal;
+    font-size: 25px;
+}
+
+::-webkit-scrollbar {
+    display: none;  /* Chrome Safari */
+
+}
+#element {
+    scrollbar-width: none;
+}
