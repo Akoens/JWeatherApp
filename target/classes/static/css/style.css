@@ -186,40 +186,6 @@ nav ul, nav li {
     width: 100%;
 }
 
-/* Book related stuff */
-
-a.book {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-a.book:hover {
-    background: #e2e9f5;
-}
-
-a .bookCover {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-a .bookCover img {
-    border-radius: 5px;
-    min-height: 200px;
-    max-height: 200px;
-    width: auto;
-}
-
-.bookCover img {
-    margin-top: 20px;
-    border-radius: 10px;
-    width: 100%;
-}
 
 /* Login Form */
 
