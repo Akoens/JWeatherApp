@@ -17,7 +17,7 @@ public class Main {
         userDao = new UserDao();
 
         port(8080);
-        staticFiles.location("/public");
+        staticFiles.location("/static");
         staticFiles.expireTime(600L);
         enableDebugScreen();
 

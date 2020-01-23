@@ -1,86 +1,230 @@
-html {
-	width: 100vw;
-	height: 100vh;
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-	width: 100%;
-	height: 100%;
-	background-color: #212121;
+    padding: 0 0 40px;
+    color: #333;
+    background: #212121;
 }
 
-.sidenav {
-	background-color: #282828;
-	width: 256px;
+h1, h2, h3, h4 {
+    font-family: monospace;
+    font-weight: 300;
+    color: #444;
 }
 
-.sidenav > li > .divider {
-	background-color: rgba(255, 255, 255, 0.1) !important;
-}
-.user-view > img {
-	display: inline-block !important;
+small {
+    color: #555;
 }
 
-.user-view > span {
-	margin-top: 0 !important;
+header {
+    background: #bc2525;
+    border-bottom: 5px solid #bc7125;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.6);
 }
 
-header, main, footer {
-	padding-left: 256px;
+nav {
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 800px;
+    position: relative;
 }
 
-@media only screen and (max-width: 992px) {
-	header, main, footer {
-		padding-left: 0;
-	}
+nav #menu {
+    margin-top: 20px;
+    float: right;
 }
 
-.sidenav li > a, .sidenav > li > a > .material-icons {
-    color: rgba(170, 170, 170) !important;
+a {
+    text-decoration: none;
+    color: #ff7761;
 }
 
-.sidenav li > a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255) !important;
+#menu li {
+    float: left;
+    margin: 0 10px;
 }
 
-nav.top-nav {
-	height: 110px;
-	-webkit-box-shadow: none;
-    box-shadow: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: #282828;
+#menu li a, #logout {
+    background: transparent;
+    cursor: pointer;
+    border: 0;
+    font-size: 16px;
+    display: inline-block;
+    color: #aaaaaa;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    text-decoration: none;
 }
 
-nav.top-nav > .container {
-	width: 100%;
+#logo {
+    max-height: 50px;
 }
 
-nav.top-nav > .container .header {
-	font-size: 48px;
-	line-height: 20px;
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 15px;
 }
 
-.sidenav .logo {
-	max-height: 64px;
-}
-.row .col.offset-s1 {
-    margin-left: 5.3333333333% !important;
-}
-
-.container {
-	margin: 0 !important;
+#content {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
 
-#toast-container {
-	top: auto !important;
-	right: auto !important;
-	position: absolute;
-	left: 50%;
-	margin-left: -50px;
-	bottom: 5%;
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid #f9a11b;
+    font-size: 14px;
 }
 
-#toast-container > .toast {
-	background-color: #2F3136;
+nav ul, nav li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Needlessly fancy menu hover effect */
+
+#menu li {
+    position: relative;
+}
+
+#menu li a::after, #logout:after {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+}
+
+#logout:hover::after,
+#logout:focus::after,
+#menu li a:hover::after,
+#menu li a:focus::after {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+/* Very basic grid */
+.row {
+    width: 100%;
+    overflow: auto;
+}
+
+.row > * {
+    float: left;
+}
+
+.row-2 .col {
+    width: 49%
+}
+
+.row-2 .col:nth-child(odd) {
+    margin: 0% 1% 0% 0%
+}
+
+.row-2 .col:nth-child(even) {
+    margin: 0% 0% 0% 1%
+}
+
+.row-3 .col {
+    width: 32%
+}
+
+.row-3 .col:nth-child(3n+1) {
+    margin: 0% 1% 0% 0%
+}
+
+.row-3 .col:nth-child(3n+2) {
+    margin: 0% 1% 0% 1%
+}
+
+.row-3 .col:nth-child(3n+3) {
+    margin: 0% 0% 0% 1%
+}
+
+@media screen and (max-width: 550px) {
+    .row .col:nth-child(n) {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+.col img {
+    display: block;
+    width: 100%;
+}
+
+
+/* Login Form */
+
+#loginForm {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#loginForm label {
+    display: block;
+    width: 100%
+}
+
+#loginForm input {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    width: 100%;
+    border-radius: 3px;
+    margin: 2px 0 20px 0;
+}
+
+#loginForm input[type="submit"] {
+    color: white;
+    background: #274555;
+    border: 0;
+    cursor: pointer;
+}
+
+.notification {
+    padding: 10px;
+    background: #333;
+    color: white;
+    border-radius: 3px;
+}
+
+.good.notification {
+    background: #008900;
+}
+
+.bad.notification {
+    background: #bb0000;
 }
