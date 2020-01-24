@@ -9,8 +9,6 @@
             <h2>Welcome to Sol-Obs</h2>
             <h3>Your personal sunblinding system</h3>
             <p>Check your devices by pressing the button below</p><br>
-            <a class="waves-effect waves-light btn-large" href="/dashboard"><i
-                    class="material-icons right">device_hub</i>Connected Devices</a><br><br>
         </div>
     </div>
 </div>

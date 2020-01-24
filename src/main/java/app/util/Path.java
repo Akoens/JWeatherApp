@@ -4,8 +4,8 @@ import lombok.*;
 
 public class Path {
     public static class Web {
-        @Getter public static final String INDEX = "/app/index/";
-        @Getter public static final String LOGIN = "/app/login/";
+        @Getter public static final String INDEX = "/";
+        @Getter public static final String LOGIN = "/login/";
         @Getter public static final String LOGOUT = "/logout/";
 
     }

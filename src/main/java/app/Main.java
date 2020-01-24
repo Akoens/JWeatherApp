@@ -16,7 +16,6 @@ public class Main {
 
         userDao = new UserDao();
 
-        port(8080);
         staticFiles.location("/static");
         staticFiles.expireTime(600L);
         enableDebugScreen();
@@ -25,6 +24,7 @@ public class Main {
         before("*", Filters.addTrailingSlashes);
         before("*",Filters.handleLocaleChange);
 
+        // Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         post(Path.Web.LOGIN,LoginController.handleLoginPost);
