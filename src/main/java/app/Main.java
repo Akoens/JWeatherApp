@@ -2,6 +2,7 @@ package app;
 
 import app.index.*;
 import app.login.*;
+import app.save.SaveController;
 import app.user.*;
 import app.util.*;
 
@@ -16,8 +17,12 @@ public class Main {
 
         userDao = new UserDao();
 
+
+        port(4567);
+        //staticFileLocation("/static");
         staticFiles.location("/static");
         staticFiles.expireTime(600L);
+
         enableDebugScreen();
 
         // Set up before-filters (called before each get/post)
@@ -29,6 +34,7 @@ public class Main {
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         post(Path.Web.LOGIN,LoginController.handleLoginPost);
         post(Path.Web.LOGOUT,LoginController.handleLogoutPost);
+        post(Path.Web.SAVE, SaveController.handleSave);
         get("*", ViewUtil.notFound);
 
         //Set up after-filters (called after each get/post)
