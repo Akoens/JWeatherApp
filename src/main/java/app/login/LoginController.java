@@ -26,7 +26,7 @@ public class LoginController {
         if (getQueryLoginRedirect(request) != null) {
             response.redirect(getQueryLoginRedirect(request));
         }
-        return ViewUtil.render(request, model, Path.Template.LOGIN);
+        return ViewUtil.render(request, model, Path.Template.INDEX);
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
