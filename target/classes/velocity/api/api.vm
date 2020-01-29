@@ -1,0 +1,7 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/xml">
+        <button>Upload</button>
+    </form>
+#end
