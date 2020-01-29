@@ -1,16 +1,59 @@
 #parse("/velocity/layout.vm")
 #@mainLayout()
-<div class="row">
-    <div class="col s2">
-
+<div class="custom-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Dashboard</h2>
+        </div>
     </div>
-    <div class="col s8">
-        <div class="text-area">
-            <h2>Welcome to Sol-Obs</h2>
-            <h3>Your personal sunblinding system</h3>
-            <p>Check your devices by pressing the button below</p><br>
+    <div class="row my-5">
+        <div class="col-xl-4 col-md-12">
+            <div class="card shadow-sm animated fadeInUp" id="card">
+                <div class="card-header bg-white">
+                    <h4>Current conditions</h4>
+                </div>
+                <div class="card-body p-5 text-center">
+                    <h1>-9C</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-12">
+            <div class="card shadow-sm animated fadeInUp">
+                <div class="card-header bg-white">
+                    <h4>Hourly forecast</h4>
+                </div>
+                <div class="card-body p-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-md-12">
+            <div class="card shadow-sm animated fadeInUp">
+                <div class="card-header bg-white">
+                    <h4>Temperature</h4>
+                </div>
+                <div class="card-body p-5">
+                    <div class="daily-chart">
+                        <canvas id="dailyChart" height="300" style="width: 100%"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row my-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4>History data</h4>
+                </div>
+                <div class="card-body p-5">
+                    <ul id="history-list"></ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 #end

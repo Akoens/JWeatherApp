@@ -13,7 +13,6 @@ public class ViewUtil {
     // The request is needed to check the app.user session for language settings
     // and to see if the app.user is logged in
     public static String render(Request request, Map<String, Object> model, String templatePath) {
-        model.put("msg", new MessageBundle(getSessionLocale(request)));
         model.put("currentUser", getSessionCurrentUser(request));
         model.put("WebPath", Path.Web.class); // Access application URLs from templates
         return strictVelocityEngine().render(new ModelAndView(model, templatePath));
@@ -21,7 +20,7 @@ public class ViewUtil {
 
     public static Route notAcceptable = (Request request, Response response) -> {
         response.status(HttpStatus.NOT_ACCEPTABLE_406);
-        return new MessageBundle(getSessionLocale(request)).get("ERROR_406_NOT_ACCEPTABLE");
+        return "ERROR_406_NOT_ACCEPTABLE";
     };
 
     public static Route notFound = (Request request, Response response) -> {

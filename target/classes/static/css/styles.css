@@ -1,0 +1,58 @@
+.sidebar {
+    height: 100%;
+    position: fixed;
+    width: 250px;
+    background: rgb(255,255,255);
+    z-index: 1;
+}
+.navbar {
+    z-index: 1;
+}
+.navbar .navbar-brand {
+    margin-left: 250px;
+}
+.sidebar ul {
+    padding: 0 2rem 0 2rem;
+}
+
+.sidebar .logo-header {
+    color: white;
+    padding: 1.5rem;
+}
+
+.sub-text {
+    color: #959595;
+}
+
+
+.sidebar .sidebar-item {
+    color: black;
+    position: relative;
+    padding: 10px;
+    text-decoration: none;
+    display: flex;
+    align-content: center;
+}
+
+.sidebar .sidebar-item .sidebar-link {
+    color: black;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar .sidebar-item .sidebar-link .sidebar-icon {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.custom-container {
+    padding: 140px 60px 60px 320px;
+    font-family: "Open Sans";
+    font-weight: 700;
+    z-index: 2;
+}

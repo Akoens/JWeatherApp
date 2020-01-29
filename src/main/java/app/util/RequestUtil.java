@@ -24,9 +24,6 @@ public class RequestUtil {
         return request.queryParams("loginRedirect");
     }
 
-    public static String getSessionLocale(Request request) {
-        return request.session().attribute("locale");
-    }
 
     public static String getSessionCurrentUser(Request request) {
         return request.session().attribute("currentUser");
