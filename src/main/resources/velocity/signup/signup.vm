@@ -26,7 +26,7 @@
                     <input type="passwordConfirm" class="form-control" placeholder="Confirm password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Sign up</button><br>
-                <small>Already have an account? <a href="$WebPath.getLOGIN()">Click here!</a></small>
+                <small>Already have an account? <a href="$WebPath.getSIGNUP()">Click here!</a></small>
             </div>
         </div>
     </div>
