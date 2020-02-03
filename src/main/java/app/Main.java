@@ -3,12 +3,22 @@ package app;
 import app.index.IndexController;
 import app.login.LoginController;
 import app.api.ApiController;
+import app.net.WeatherClient;
+import app.net.WeatherClientListener;
+import app.net.WeatherDataReceiver;
 import app.settings.SettingsController;
 import app.signup.SignupController;
 import app.user.UserDao;
 import app.util.Filters;
 import app.util.Path;
 import app.util.ViewUtil;
+
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -46,6 +56,15 @@ public class Main {
 
         //Set up after-filters (called after each get/post)
         after("*",Filters.addGzipHeader);
+
+
+        try {
+            WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
+            receiver.addWeatherServerListener(WeatherClient::listen);
+            receiver.listen();
+        } catch (CertificateException | UnrecoverableKeyException | NoSuchAlgorithmException | KeyStoreException | KeyManagementException | IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

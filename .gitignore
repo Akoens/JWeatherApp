@@ -9,6 +9,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+*.p12
+
 # Generated files
 .idea/**/contentModel.xml
 
