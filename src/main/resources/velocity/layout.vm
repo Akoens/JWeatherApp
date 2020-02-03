@@ -33,7 +33,9 @@
             <ul class="ml-auto navbar-nav">
                 #if($currentUser)
                     <li class="nav-item">
-                        <a class="nav-link" href="$WebPath.getLOGOUT()" tabindex="-1" aria-disabled="false">Logout</a>
+                        <form method="post" action="$WebPath.getLOGOUT()">
+                            <button class="btn btn-link nav-link" tabindex="-1" aria-disabled="false">Logout</button>
+                        </form>
                     </li>
                 #else
                     <li class="nav-item">
