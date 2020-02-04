@@ -23,9 +23,8 @@ public class Main {
         try {
             userDao = new UserDao();
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e.getMessage());
         }
-
 
         port(4567);
         staticFiles.location("/static");

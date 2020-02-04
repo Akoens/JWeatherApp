@@ -13,6 +13,6 @@ public class GeneralController {
 
     public static Route serveGeneralPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        return ViewUtil.render(request, model, Path.Template.INDEX);
+        return ViewUtil.render(request, model, Path.Template.GENERAL);
     };
 }
