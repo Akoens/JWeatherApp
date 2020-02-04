@@ -50,6 +50,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -79,3 +80,4 @@ fabric.properties
 .idea/modules.xml
 .idea/vcs.xml
 .idea/artifacts/
+JWeatherApp.iml
