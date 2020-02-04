@@ -4,6 +4,7 @@
     width: 250px;
     background: rgb(255,255,255);
     z-index: 1;
+    transition: .3s all;
 }
 .navbar {
     z-index: 1;
@@ -60,4 +61,26 @@
 #map { 
     width: 100%;
     height: 400px;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        transition: .3s all;
+        width: 75px;
+    }
+
+    .sidebar ul {
+        padding: 0 1rem 0 1rem;
+    }
+
+    .sidebar .sidebar-item .sidebar-link .sidebar-text {
+        display: none;
+    }
+
+    .custom-container {
+        padding: 140px 60px 60px 120px;
+        font-family: "Open Sans";
+        font-weight: 700;
+        z-index: 2;
+    }
 }
