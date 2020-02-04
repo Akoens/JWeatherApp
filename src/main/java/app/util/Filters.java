@@ -2,6 +2,7 @@ package app.util;
 
 import spark.*;
 import static app.util.RequestUtil.*;
+import static spark.Spark.halt;
 
 public class Filters {
 
@@ -19,6 +20,12 @@ public class Filters {
         if (getQueryLocale(request) != null) {
             request.session().attribute("locale", getQueryLocale(request));
             response.redirect(request.pathInfo());
+        }
+    };
+
+    public static Filter handleForbiddenAuthentication = (Request request, Response response) -> {
+        if((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1)){
+            response.redirect(Path.Web.FORBIDDEN);
         }
     };
 

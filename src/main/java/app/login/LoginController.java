@@ -4,6 +4,8 @@ import app.user.*;
 import app.util.*;
 import spark.*;
 import java.util.*;
+
+import static app.Main.userDao;
 import static app.util.RequestUtil.*;
 
 public class LoginController {
@@ -22,7 +24,9 @@ public class LoginController {
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
         model.put("authenticationSucceeded", true);
-        request.session().attribute("currentUser", getQueryEmail(request));
+        String userEmail = getQueryEmail(request);
+        request.session().attribute("currentUser", userEmail);
+        request.session().attribute("authLevel",userDao.getUserByEmail(userEmail).getAuthLevel());
         if (getQueryLoginRedirect(request) != null) {
             response.redirect(getQueryLoginRedirect(request));
         }

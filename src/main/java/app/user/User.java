@@ -12,11 +12,11 @@ public class User {
         this.authLevel = authLevel;
     }
 
-    int getAuthLevel(){return authLevel;}
-    String getHashedPassword() {
+    public  int getAuthLevel(){return authLevel;}
+    public String getHashedPassword() {
         return hashedPassword;
     }
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 

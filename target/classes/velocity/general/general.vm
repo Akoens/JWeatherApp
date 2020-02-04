@@ -1,0 +1,4 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<h1>Welcome to the Brunei Transporting Company</h1>
+#end
