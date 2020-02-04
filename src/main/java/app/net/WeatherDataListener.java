@@ -1,9 +1,11 @@
 package app.net;
 
-import app.model.WeatherData;
+import app.model.AfricanData;
+import app.model.EurasianData;
 
 public interface WeatherDataListener {
 
-    void onWeatherData(WeatherData data);
+    void onEurasianData(EurasianData data);
+    void onAfricanData(AfricanData data);
 
 }

@@ -1,13 +1,14 @@
 package app;
 
+import app.engine.WeatherDataProcessor;
 import app.index.IndexController;
 import app.login.LoginController;
 import app.api.ApiController;
 import app.net.WeatherClient;
-import app.net.WeatherClientListener;
 import app.net.WeatherDataReceiver;
 import app.settings.SettingsController;
 import app.signup.SignupController;
+import app.store.WeatherDataStore;
 import app.user.UserDao;
 import app.util.Filters;
 import app.util.Path;
@@ -58,13 +59,9 @@ public class Main {
         after("*",Filters.addGzipHeader);
 
 
-        try {
-            WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
-            receiver.addWeatherServerListener(WeatherClient::listen);
-            receiver.listen();
-        } catch (CertificateException | UnrecoverableKeyException | NoSuchAlgorithmException | KeyStoreException | KeyManagementException | IOException e) {
-            e.printStackTrace();
-        }
-
+        WeatherDataProcessor processor = new WeatherDataProcessor(new WeatherDataStore());
+        WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
+        receiver.addWeatherServerListener(processor);
+        receiver.listen();
     }
 }

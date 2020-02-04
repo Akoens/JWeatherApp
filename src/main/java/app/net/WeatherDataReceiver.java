@@ -1,7 +1,5 @@
 package app.net;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,10 +51,14 @@ public class WeatherDataReceiver {
         listeners.add(listener);
     }
 
-    public void listen() throws CertificateException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, IOException {
-        serverSocket = initServerSocket();
-        thread.start();
-        System.out.println("WeatherData listening on :" + port);
+    public void listen() {
+        try {
+            serverSocket = initServerSocket();
+            thread.start();
+            System.out.println("EurasianData listening on :" + port);
+        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException | UnrecoverableKeyException | KeyManagementException e) {
+            e.printStackTrace();
+        }
     }
 
     public void interrupt() {
