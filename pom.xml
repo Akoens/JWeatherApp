@@ -35,32 +35,40 @@
         </plugins>
     </build>
 
+    <!-- All of the project dependencies -->
+    <!-- -->
     <dependencies>
+        <!-- The Spark library -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
             <version>2.9.1</version>
         </dependency>
+        <!-- Velocity template rendering -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-template-velocity</artifactId>
             <version>2.7.1</version>
         </dependency>
+        <!-- Web browser debugger-->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-debug-tools</artifactId>
             <version>0.5</version>
         </dependency>
+        <!-- Javax servlet responds-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- Jbcrypt password hashing-->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.3m</version>
         </dependency>
+        <!-- Server request logger-->
         <dependency>
             <groupId> org.apache.cassandra</groupId>
             <artifactId>cassandra-all</artifactId>
@@ -77,17 +85,26 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Server request logger extension -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.12</version>
         </dependency>
+        <!-- Lombok getter/setter generator -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Jdbc SQLite database library -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.30.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

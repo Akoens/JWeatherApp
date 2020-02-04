@@ -12,8 +12,8 @@ public class RequestUtil {
         return request.params("isbn");
     }
 
-    public static String getQueryUsername(Request request) {
-        return request.queryParams("username");
+    public static String getQueryEmail(Request request) {
+        return request.queryParams("email");
     }
 
     public static String getQueryPassword(Request request) {
