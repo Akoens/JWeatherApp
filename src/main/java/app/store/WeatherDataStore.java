@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 public class WeatherDataStore {
 
     private static final String DATA_DATE_FORMAT = "dd-MM-yyyy";
-    private static final String DATA_PREFIX_FORMAT = "HH:mm:ss";
+    private static final String DATA_PREFIX_FORMAT = "HH:mm";
     private static final String DATA_EXT = "wd";
     private static final String ROOT_PATH = System.getProperty("user.dir");
     private static final String DATABASE_FOLDER = "\\database";

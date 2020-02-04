@@ -27,6 +27,6 @@ public class AfricanData {
     }
 
     public String getStoreString() {
-        return "" + getHeatIndex();
+        return String.format("%.2f", getHeatIndex());
     }
 }

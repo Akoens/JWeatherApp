@@ -55,6 +55,7 @@ public class WeatherClient {
     private void run() { //TODO::Add sanitization.
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println("STATUS: WeatherClient connected");
             String line;
             while ((line = reader.readLine()) != null && isAlive()) {
                 String[] data = line.split(",");

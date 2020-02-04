@@ -88,17 +88,21 @@ public class EurasianData {
     }
 
     public String getStoreString() {
-        return "" + getTemperature() +
-                "," + getDewPoint() +
-                "," + getStationAirPressure() +
-                "," + getSeaLevelAirPressure() +
-                "," + getVisibility() +
-                "," + getWindSpeed() +
-                "," + getDownfall() +
-                "," + getSnowfall() +
-                "," + getEvents() +
-                "," + getCloudCoverage() +
-                "," + getWindDirection();
+        return String.format(
+                "%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%d,%.2f,%d",
+                getTemperature(),
+                getDewPoint(),
+                getStationAirPressure(),
+                getSeaLevelAirPressure(),
+                getVisibility(),
+                getWindSpeed(),
+                getDownfall(),
+                getSnowfall(),
+                getEvents(),
+                getCloudCoverage(),
+                getWindDirection()
+        );
+
     }
 
 }
