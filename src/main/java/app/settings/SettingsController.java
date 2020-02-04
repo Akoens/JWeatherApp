@@ -14,7 +14,7 @@ import static app.Main.userDao;
 public class SettingsController {
     public static Route serveSettingsPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("users", userDao.getAllUserNames());
+        model.put("users", userDao.getAllEmails());
         return ViewUtil.render(request, model, Path.Template.SETTINGS);
     };
 }

@@ -19,7 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        userDao = new UserDao();
+        try {
+            userDao = new UserDao();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 
         port(4567);
@@ -30,7 +34,7 @@ public class Main {
 
         // Set up before-filters (called before each get/post)
         before("*", Filters.addTrailingSlashes);
-        before("*",Filters.handleLocaleChange);
+        before("*", Filters.handleLocaleChange);
 
         // Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);
@@ -39,13 +43,13 @@ public class Main {
         get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
         get(Path.Web.API, ApiController.serveApiPage);
 
-        post(Path.Web.LOGIN,LoginController.handleLoginPost);
-        post(Path.Web.LOGOUT,LoginController.handleLogoutPost);
+        post(Path.Web.LOGIN, LoginController.handleLoginPost);
+        post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         post(Path.Web.API, ApiController.handleApi);
         get("*", ViewUtil.notFound);
 
         //Set up after-filters (called after each get/post)
-        after("*",Filters.addGzipHeader);
+        after("*", Filters.addGzipHeader);
 
     }
 }

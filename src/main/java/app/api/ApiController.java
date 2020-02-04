@@ -15,7 +15,7 @@ import static app.Main.userDao;
 public class ApiController {
     public static Route serveApiPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("users", userDao.getAllUserNames());
+        model.put("users", userDao.getAllEmails());
         return ViewUtil.render(request, model, app.util.Path.Template.API);
     };
 
