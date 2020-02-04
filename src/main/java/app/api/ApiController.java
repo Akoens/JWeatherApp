@@ -10,12 +10,10 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import app.util.Path;
-import static app.Main.userDao;
 
 public class ApiController {
     public static Route serveApiPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("users", userDao.getAllUserNames());
         return ViewUtil.render(request, model, app.util.Path.Template.API);
     };
 

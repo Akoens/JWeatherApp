@@ -33,7 +33,9 @@
             <ul class="ml-auto navbar-nav">
                 #if($currentUser)
                     <li class="nav-item">
-                        <a class="nav-link" href="$WebPath.getLOGOUT()" tabindex="-1" aria-disabled="false">Logout</a>
+                        <form method="post" action="$WebPath.getLOGOUT()">
+                            <button class="btn btn-link nav-link" tabindex="-1" aria-disabled="false">Logout</button>
+                        </form>
                     </li>
                 #else
                     <li class="nav-item">
@@ -49,8 +51,8 @@
     </div>
 
     <ul class="list-unstyled my-4">
-        <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> Dashboard</a></li>
-        <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> Settings</a></li>
+        <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
+        <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
     </ul>
 </nav>
 <main>
@@ -60,9 +62,9 @@
 </footer>
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="js/scripts.js"></script>
+<script src="/js/scripts.js"></script>
 
-<script src="js/all.js"></script>
+<script src="/js/all.js"></script>
 </body>
 </html>
 #end

@@ -4,6 +4,8 @@ import app.user.*;
 import app.util.*;
 import spark.*;
 import java.util.*;
+
+import static app.Main.userDao;
 import static app.util.RequestUtil.*;
 
 public class LoginController {
@@ -17,22 +19,24 @@ public class LoginController {
 
     public static Route handleLoginPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        if (!UserController.authenticate(getQueryUsername(request), getQueryPassword(request))) {
+        if (!UserController.authenticate(getQueryEmail(request), getQueryPassword(request))) {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
         model.put("authenticationSucceeded", true);
-        request.session().attribute("currentUser", getQueryUsername(request));
+        String userEmail = getQueryEmail(request);
+        request.session().attribute("currentUser", userEmail);
+        request.session().attribute("authLevel",userDao.getUserByEmail(userEmail).getAuthLevel());
         if (getQueryLoginRedirect(request) != null) {
             response.redirect(getQueryLoginRedirect(request));
         }
-        return ViewUtil.render(request, model, Path.Template.INDEX);
+        return ViewUtil.render(request, model, Path.Template.LOGIN);
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
         request.session().removeAttribute("currentUser");
         request.session().attribute("loggedOut", true);
-        response.redirect(Path.Web.LOGIN);
+        response.redirect(Path.Web.LOGOUT);
         return null;
     };
 

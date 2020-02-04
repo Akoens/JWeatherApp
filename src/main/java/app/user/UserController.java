@@ -7,16 +7,15 @@ public class UserController {
 
     // Authenticate the app.user by hashing the inputted password using the stored salt,
     // then comparing the generated hashed password to the stored hashed password
-    public static boolean authenticate(String username, String password) {
-        if (username.isEmpty() || password.isEmpty()) {
+    public static boolean authenticate(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
             return false;
         }
-        User user = userDao.getUserByUsername(username);
+        User user = userDao.getUserByEmail(email);
         if (user == null) {
             return false;
         }
-        String hashedPassword = BCrypt.hashpw(password, user.getSalt());
-        return hashedPassword.equals(user.getHashedPassword());
+        return BCrypt.checkpw(password, user.getHashedPassword());
     }
 
     // This method doesn't do anything, it's just included as an example

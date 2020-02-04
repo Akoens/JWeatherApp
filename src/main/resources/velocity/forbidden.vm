@@ -1,6 +1,6 @@
 #parse("/velocity/layout.vm")
 #@mainLayout()
 <div class="custom-container">
-    <h1>ERROR_404_NOT_FOUND</h1>
+    <h1>ERROR_403_FORBIDDEN</h1>
 </div>
 #end
