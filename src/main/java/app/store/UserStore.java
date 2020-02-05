@@ -29,11 +29,11 @@ public class UserStore {
     public void insertTestUsers() throws SQLException {
         statement = connection.createStatement();
         statement.execute(
-                "INSERT OR IGNORE INTO `Users` \n" +
-                    "(`id`, `email`, `hashed_password`, `auth_level`)\n" +
-                "VALUES \n" +
-                    "(1, 'perwendel@gmail.com', '$2a$10$h.dl5J86rGH7I8bD9bZeZeci0pDt0.VwFTGujlnEaZXPf/q7vM5wO', 0), \n" +
-                    "(2, 'davidase@gmail.com', '$2a$10$e0MYzXyjpJS7Pd0RVvHwHe1HlCS4bZJ18JuywdEMLT83E1KDmUhCy', 1), \n" +
+                "INSERT OR IGNORE INTO `Users`" +
+                    "(`id`, `email`, `hashed_password`, `auth_level`)" +
+                "VALUES" +
+                    "(1, 'perwendel@gmail.com', '$2a$10$h.dl5J86rGH7I8bD9bZeZeci0pDt0.VwFTGujlnEaZXPf/q7vM5wO', 0)," +
+                    "(2, 'davidase@gmail.com', '$2a$10$e0MYzXyjpJS7Pd0RVvHwHe1HlCS4bZJ18JuywdEMLT83E1KDmUhCy', 1)," +
                     "(3, 'federico@gmail.com', '$2a$10$E3DgchtVry3qlYlzJCsyxeSK0fftK4v0ynetVCuDdxGVl1obL.ln2', 2)"
         );
     }
