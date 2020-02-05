@@ -42,10 +42,10 @@ setInterval(function() {
 }, 5000);
 
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2FlbDEyIiwiYSI6ImNrNjBrM3ZhNjA4NjMzb255ZHhuaXFjMmIifQ.9wOwjE4_ev_0oaczMlIB5w';
+mapboxgl.accessToken = 'pk.eyJ1IjoibnVvbG9uIiwiYSI6ImNrNjZkdmx2ZDAzbGQza3Bqd2JlbWdra2wifQ.tIEIuYnogcurldkxvowetA'; // Nick's Access Token
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/kael12/ck60k4zxc0mvj1iqcd14jcmld', // stylesheet location
+    style: '/json/mapstyle.json', // stylesheet location
     center: [31.55, 31.1], // starting position
     zoom: 7
 });
