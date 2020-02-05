@@ -24,6 +24,7 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 public class Main {
 
     public static UserStore userStore;
+    public static WeatherDataStore weatherDataStore;
 
     public static void main(String[] args) {
 
@@ -45,7 +46,9 @@ public class Main {
         }
 
         //Setup weather data receiver
-        WeatherDataHandler handler = new WeatherDataHandler(new WeatherDataStore());
+        weatherDataStore = new WeatherDataStore();
+        weatherDataStore.touchDirectories();
+        WeatherDataHandler handler = new WeatherDataHandler(weatherDataStore);
         WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
         receiver.addWeatherServerListener(handler);
         receiver.listen();
