@@ -57,8 +57,7 @@ public class WeatherDataReceiver {
             thread.start();
             System.out.println("Weather data receiver listening on :" + port);
         } catch (NullPointerException e) {
-            System.err.println("ERROR: No certificate, ceasing operation");
-            System.exit(1);
+            System.err.println("ERROR: No certificate, can't collect live data");
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException | UnrecoverableKeyException | KeyManagementException e) {
             e.printStackTrace();
             System.err.println("ERROR: Bad certificate, ceasing operation");

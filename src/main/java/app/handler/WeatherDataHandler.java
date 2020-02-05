@@ -29,5 +29,6 @@ public class WeatherDataHandler implements WeatherClientListener, WeatherDataLis
     @Override
     public void onAfricanData(AfricanData data) {
         weatherDataStore.saveAfricanData(data);
+        System.out.println(weatherDataStore.getLatestAfricanEntry(data.getStationID()));
     }
 }
