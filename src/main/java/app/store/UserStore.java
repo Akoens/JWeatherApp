@@ -45,7 +45,6 @@ public class UserStore {
             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Users WHERE email=?");
             pstmt.setString(1,email);
             ResultSet result = pstmt.executeQuery();
-            pstmt.close();
             return new User(result.getString("email"),result.getString("hashed_password"), result.getInt("auth_level"));
         } catch (SQLException e){
             System.err.println("GettingUserByEmail Error" + e.getMessage());
@@ -97,6 +96,7 @@ public class UserStore {
     public void close(){
         try {
             connection.close();
+
         } catch (SQLException e){
             System.err.println("Connection closing Error" + e.getMessage());
         }

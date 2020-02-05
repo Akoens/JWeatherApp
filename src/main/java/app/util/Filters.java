@@ -1,5 +1,6 @@
 package app.util;
 
+import app.controller.LoginController;
 import spark.*;
 import static app.util.RequestUtil.*;
 import static spark.Spark.halt;
@@ -23,8 +24,14 @@ public class Filters {
         }
     };
 
-    public static Filter handleForbiddenAuthentication = (Request request, Response response) -> {
-        if((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1)){
+    public static Filter handleLoginAuthentication = (Request request, Response response) -> {
+        String pathInfo = request.pathInfo();
+        System.out.println(pathInfo);
+        if ((request.session().attribute("currentUser") == null)) {
+            request.session().attribute("loginRedirect", pathInfo);
+            response.redirect(Path.Web.GENERAL);
+        }
+        if((pathInfo.equals(Path.Web.INDEX))&&((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1))){
             response.redirect(Path.Web.FORBIDDEN);
         }
     };
