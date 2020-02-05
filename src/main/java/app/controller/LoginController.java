@@ -1,11 +1,10 @@
-package app.login;
+package app.controller;
 
-import app.user.*;
 import app.util.*;
 import spark.*;
 import java.util.*;
 
-import static app.Main.userDao;
+import static app.Main.userStore;
 import static app.util.RequestUtil.*;
 
 public class LoginController {
@@ -26,7 +25,7 @@ public class LoginController {
         model.put("authenticationSucceeded", true);
         String userEmail = getQueryEmail(request);
         request.session().attribute("currentUser", userEmail);
-        request.session().attribute("authLevel",userDao.getUserByEmail(userEmail).getAuthLevel());
+        request.session().attribute("authLevel", userStore.getUserByEmail(userEmail).getAuthLevel());
         if (getQueryLoginRedirect(request) != null) {
             response.redirect(getQueryLoginRedirect(request));
         }

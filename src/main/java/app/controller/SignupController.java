@@ -1,4 +1,4 @@
-package app.signup;
+package app.controller;
 
 import app.util.Path;
 import app.util.ViewUtil;
@@ -8,8 +8,6 @@ import spark.Route;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static app.Main.userDao;
 
 public class SignupController {
     public static Route serveSignupPage = (Request request, Response response) -> {

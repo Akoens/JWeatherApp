@@ -1,4 +1,4 @@
-package app.api;
+package app.controller;
 
 import app.util.ViewUtil;
 import spark.*;

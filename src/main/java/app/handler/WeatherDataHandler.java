@@ -1,4 +1,4 @@
-package app.engine;
+package app.handler;
 
 import app.model.AfricanData;
 import app.model.EurasianData;
@@ -7,11 +7,11 @@ import app.net.WeatherClientListener;
 import app.net.WeatherDataListener;
 import app.store.WeatherDataStore;
 
-public class WeatherDataProcessor implements WeatherClientListener, WeatherDataListener {
+public class WeatherDataHandler implements WeatherClientListener, WeatherDataListener {
 
     private WeatherDataStore weatherDataStore;
 
-    public WeatherDataProcessor(WeatherDataStore weatherDataStore) {
+    public WeatherDataHandler(WeatherDataStore weatherDataStore) {
         this.weatherDataStore = weatherDataStore;
     }
 

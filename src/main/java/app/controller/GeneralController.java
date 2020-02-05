@@ -1,4 +1,4 @@
-package app.general;
+package app.controller;
 
 import app.util.Path;
 import app.util.ViewUtil;

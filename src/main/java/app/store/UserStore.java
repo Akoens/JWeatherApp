@@ -1,26 +1,28 @@
-package app.user;
+package app.store;
+
+import app.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDao {
+public class UserStore {
 
-    private static Connection connection;
+    private Connection connection;
     private Statement statement;
-    private static final String LINK = "jdbc:sqlite:src/main/resources/sqlitedb/Users.db";
 
     /*
-    private final List<User> users = ImmutableList.of(
-            //        Username    Salt for hash                    Hashed password (the password is "password" for all users)
-            new User("perwendel@gmail.com", "$2a$10$h.dl5J86rGH7I8bD9bZeZeci0pDt0.VwFTGujlnEaZXPf/q7vM5wO", 0), //"$2a$10$h.dl5J86rGH7I8bD9bZeZe",
-            new User("davidase@gmail.com", "$2a$10$e0MYzXyjpJS7Pd0RVvHwHe1HlCS4bZJ18JuywdEMLT83E1KDmUhCy", 1), //"$2a$10$e0MYzXyjpJS7Pd0RVvHwHe",
-            new User("federico@gmail.com", "$2a$10$E3DgchtVry3qlYlzJCsyxeSK0fftK4v0ynetVCuDdxGVl1obL.ln2", 2) //"$2a$10$E3DgchtVry3qlYlzJCsyxe",
-    );
-    */
+        Test users:
+        usr: perwendel@gmail.com | pass: password | authlvl: 0
+        usr: davidase@gmail.com  | pass: password | authlvl: 1
+        usr: federico@gmail.com  | pass: password | authlvl: 2
 
-    public UserDao() throws ClassNotFoundException, SQLException {
-        Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection(LINK);
+     */
+
+    public UserStore(Connection connection) {
+        this.connection = connection;
+    }
+
+    public void createTables() throws SQLException {
         statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS \"Users\" (\"id\"INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\"email\" TEXT UNIQUE,\"hashed_password\" TEXT,\"auth_level\" INTEGER)");
     }

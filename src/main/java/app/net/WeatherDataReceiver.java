@@ -25,7 +25,7 @@ public class WeatherDataReceiver {
             //Trust store
             KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             InputStream tin = getClass().getClassLoader().getResourceAsStream("cert/servercert.p12");
-            trustStore.load(tin, "yeetus".toCharArray());
+            trustStore.load(tin, "yeetus".toCharArray());//TODO::Move password to config file
             tin.close();
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             trustManagerFactory.init(trustStore);
@@ -55,9 +55,14 @@ public class WeatherDataReceiver {
         try {
             serverSocket = initServerSocket();
             thread.start();
-            System.out.println("EurasianData listening on :" + port);
+            System.out.println("Weather data receiver listening on :" + port);
+        } catch (NullPointerException e) {
+            System.err.println("ERROR: No certificate, ceasing operation");
+            System.exit(1);
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException | UnrecoverableKeyException | KeyManagementException e) {
             e.printStackTrace();
+            System.err.println("ERROR: Bad certificate, ceasing operation");
+            System.exit(1);
         }
     }
 

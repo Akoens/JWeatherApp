@@ -1,4 +1,4 @@
-package app.user;
+package app.model;
 
 public class User {
     private String email;

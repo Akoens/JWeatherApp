@@ -1,41 +1,53 @@
 package app;
 
-import app.engine.WeatherDataProcessor;
-import app.general.GeneralController;
-import app.index.IndexController;
-import app.login.LoginController;
-import app.api.ApiController;
-import app.net.WeatherClient;
+import app.database.Database;
+import app.handler.WeatherDataHandler;
+import app.controller.GeneralController;
+import app.controller.IndexController;
+import app.controller.LoginController;
+import app.controller.ApiController;
 import app.net.WeatherDataReceiver;
-import app.settings.SettingsController;
-import app.signup.SignupController;
+import app.controller.SettingsController;
+import app.controller.SignupController;
 import app.store.WeatherDataStore;
-import app.user.UserDao;
+import app.store.UserStore;
 import app.util.Filters;
 import app.util.Path;
 import app.util.ViewUtil;
 
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
 
-    public static UserDao userDao;
+    public static UserStore userStore;
 
     public static void main(String[] args) {
 
-        try {
-            userDao = new UserDao();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+        //Setup sqlite database
+        Connection connection = Database.getSQLiteConnection();;
+        if (connection == null) {
+            System.err.println("ERROR: No database connection, ceasing operation");
+            System.exit(1);
         }
+
+        //Setup user store
+        try {
+            userStore = new UserStore(connection);
+            userStore.createTables();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("ERROR: Could not create database tables");
+        }
+
+        //Setup weather data receiver
+        WeatherDataHandler handler = new WeatherDataHandler(new WeatherDataStore());
+        WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
+        receiver.addWeatherServerListener(handler);
+        receiver.listen();
 
         port(4567);
         staticFiles.location("/static");
@@ -43,7 +55,7 @@ public class Main {
 
         enableDebugScreen();
 
-        // Set up before-filters (called before each get/post)
+        //Setup before-filters (called before each get/post)
         before("*", Filters.addTrailingSlashes);
         before("*", Filters.handleLocaleChange);
 
@@ -51,7 +63,7 @@ public class Main {
         before(Path.Web.INDEX, Filters.handleForbiddenAuthentication);
         before(Path.Web.SETTINGS, Filters.handleForbiddenAuthentication);
 
-        // Get and Post
+        //Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);
         get(Path.Web.GENERAL, GeneralController.serveGeneralPage);
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
@@ -65,13 +77,7 @@ public class Main {
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
 
-        //Set up after-filters (called after each get/post)
+        //Setup after-filters (called after each get/post)
         after("*", Filters.addGzipHeader);
-
-
-        WeatherDataProcessor processor = new WeatherDataProcessor(new WeatherDataStore());
-        WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
-        receiver.addWeatherServerListener(processor);
-        receiver.listen();
     }
 }
