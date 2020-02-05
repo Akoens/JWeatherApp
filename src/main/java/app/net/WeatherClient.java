@@ -59,7 +59,6 @@ public class WeatherClient {
             String line;
             while ((line = reader.readLine()) != null && isAlive()) {
                 String[] data = line.split(",");
-                System.out.println(line);
                 if (data.length < 4) {
                     handleAfricanData(data);
                 } else {

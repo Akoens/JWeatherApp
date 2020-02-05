@@ -1,5 +1,9 @@
 package app.model;
 
+import app.store.WeatherDataStore;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AfricanData {
@@ -28,5 +32,23 @@ public class AfricanData {
 
     public String getStoreString() {
         return String.format("%.2f", getHeatIndex());
+    }
+
+    public static AfricanData fromFileLine(int stationID, String fileName, String line) throws ParseException {
+        String[] data = line.split(",");
+        if (data.length != 2)
+            return null;
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(WeatherDataStore.DATA_DATE_FORMAT + " " + WeatherDataStore.DATA_PREFIX_FORMAT);
+        return new AfricanData(stationID, dateFormat.parse(fileName + " " + data[0]), Double.parseDouble(data[1]));
+    }
+
+    @Override
+    public String toString() {
+        return "AfricanData{" +
+                "stationID=" + stationID +
+                ", date=" + date +
+                ", heatIndex=" + heatIndex +
+                '}';
     }
 }
