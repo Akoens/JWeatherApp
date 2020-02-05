@@ -9,6 +9,12 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+*.p12
+
+database/
+target/
+target/classes/app/
+
 # Generated files
 .idea/**/contentModel.xml
 
@@ -44,6 +50,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -73,3 +80,4 @@ fabric.properties
 .idea/modules.xml
 .idea/vcs.xml
 .idea/artifacts/
+JWeatherApp.iml
