@@ -28,7 +28,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Setup sqlite database
-        Connection connection = Database.getSQLiteConnection();;
+        Connection connection = Database.getSQLiteConnection();
         if (connection == null) {
             System.err.println("ERROR: No database connection, ceasing operation");
             System.exit(1);
@@ -38,6 +38,7 @@ public class Main {
         try {
             userStore = new UserStore(connection);
             userStore.createTables();
+            userStore.insertTestUsers();
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println("ERROR: Could not create database tables");

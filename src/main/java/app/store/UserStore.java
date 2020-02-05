@@ -10,13 +10,6 @@ public class UserStore {
     private Connection connection;
     private Statement statement;
 
-    /*
-        Test users:
-        usr: perwendel@gmail.com | pass: password | authlvl: 0
-        usr: davidase@gmail.com  | pass: password | authlvl: 1
-        usr: federico@gmail.com  | pass: password | authlvl: 2
-
-     */
 
     public UserStore(Connection connection) {
         this.connection = connection;
@@ -25,6 +18,24 @@ public class UserStore {
     public void createTables() throws SQLException {
         statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS \"Users\" (\"id\"INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\"email\" TEXT UNIQUE,\"hashed_password\" TEXT,\"auth_level\" INTEGER)");
+    }
+
+    /*
+        Test users:
+        usr: perwendel@gmail.com | pass: password | authlvl: 0
+        usr: davidase@gmail.com  | pass: password | authlvl: 1
+        usr: federico@gmail.com  | pass: password | authlvl: 2
+     */
+    public void insertTestUsers() throws SQLException {
+        statement = connection.createStatement();
+        statement.execute(
+                "INSERT OR IGNORE INTO `Users` \n" +
+                    "(`id`, `email`, `hashed_password`, `auth_level`)\n" +
+                "VALUES \n" +
+                    "(1, 'perwendel@gmail.com', '$2a$10$h.dl5J86rGH7I8bD9bZeZeci0pDt0.VwFTGujlnEaZXPf/q7vM5wO', 0), \n" +
+                    "(2, 'davidase@gmail.com', '$2a$10$e0MYzXyjpJS7Pd0RVvHwHe1HlCS4bZJ18JuywdEMLT83E1KDmUhCy', 1), \n" +
+                    "(3, 'federico@gmail.com', '$2a$10$E3DgchtVry3qlYlzJCsyxeSK0fftK4v0ynetVCuDdxGVl1obL.ln2', 2)"
+        );
     }
 
     public User getUserByEmail(String email) {
