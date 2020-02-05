@@ -1,7 +1,7 @@
 #parse("/velocity/layout.vm")
 #@mainLayout()
 <div class="row justify-content-center align-items-center" style="height: 100vh">
-    <div class="col-xl-4 col-md-12">
+    <div class="col-xl-6 col-sm-12">
         <div class="card shadow">
             <div class="card-body p-5">
                 <div class="card-logo text-center">
@@ -26,7 +26,7 @@
                     <input type="passwordConfirm" class="form-control" placeholder="Confirm password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Sign up</button><br>
-                <small>Already have an account? <a href="$WebPath.getSIGNUP()">Click here!</a></small>
+                <small>Already have an account? <a href="$WebPath.getLOGIN()">Click here!</a></small>
             </div>
         </div>
     </div>

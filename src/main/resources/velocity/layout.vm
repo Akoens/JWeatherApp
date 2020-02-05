@@ -46,14 +46,16 @@
         </div>
 </nav>
 <nav class="sidebar shadow-sm">
+  <div class="sidebar-content">    
     <div class="sidebar-brand p-4">
-        <img src="/img/brunei-logo.jpg" alt="" height="70"></a>
+      <img src="/img/brunei-logo.jpg" alt="" height="70"></a>
     </div>
 
     <ul class="list-unstyled my-4">
-        <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
-        <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
+      <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
+      <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
     </ul>
+  </div>
 </nav>
 <main>
     $bodyContent

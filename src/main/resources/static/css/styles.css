@@ -1,10 +1,11 @@
 .sidebar {
     height: 100%;
-    position: fixed;
+    position: relative;
     width: 250px;
     background: rgb(255,255,255);
     z-index: 1;
     transition: .3s all;
+    float: left;
 }
 .navbar {
     z-index: 1;
@@ -25,6 +26,9 @@
     color: #959595;
 }
 
+.sidebar-content {
+  position: fixed;
+}
 
 .sidebar .sidebar-item {
     color: black;
@@ -58,7 +62,7 @@
     z-index: 2;
 }
 
-#map { 
+#map {
     width: 100%;
     height: 400px;
 }
