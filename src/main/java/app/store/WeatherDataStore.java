@@ -7,6 +7,8 @@ import app.util.FileUtil;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -19,6 +21,7 @@ public class WeatherDataStore {
     private static final String DATABASE_FOLDER = "\\database";
     private static final String EURASIAN_DATABASE_FOLDER = "\\eurasia";
     private static final String AFRICAN_DATABASE_FOLDER = "\\africa";
+    private static final int MAX_DATA_AGE_MONTHS = 1;
 
     private SimpleDateFormat dateFormat;
     private SimpleDateFormat prefixFormat;
@@ -70,14 +73,17 @@ public class WeatherDataStore {
             return null;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
             String lastLine = FileUtil.tail(file);
+
+            if (lastLine == null)
+                return null;
+
             return AfricanData.fromFileLine(
                     stationID,
-                    file.getName().substring(0, file.getName().lastIndexOf(".")),
+                    FileUtil.parseDateFromWB(file),
                     lastLine
             );
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
@@ -92,13 +98,24 @@ public class WeatherDataStore {
         if (!file.exists())
             return null;
 
+        String data = FileUtil.tail2(file, 60);
+        if (data == null)
+            return null;
+
+        String[] lines = data.split("\r\n");
+        ArrayList<AfricanData> dataList = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            String lastLine = "";
-            while ((line = reader.readLine()) != null)
-                lastLine = line;
-        } catch (IOException e) {
+            for (String line : lines) {
+                dataList.add(
+                        AfricanData.fromFileLine(
+                                stationID,
+                                FileUtil.parseDateFromWB(file),
+                                line
+                        )
+                );
+            }
+            return dataList.toArray(new AfricanData[]{});
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
@@ -141,6 +158,39 @@ public class WeatherDataStore {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void cleanup() {
+        System.out.println("STATUS: Cleaning old data");
+        cleanDir(new File(getEurasianPath()));
+        cleanDir(new File(getAfricanPath()));
+    }
+
+    private void cleanDir(File dir) {
+        if (dir == null)
+            return;
+
+        if (!dir.exists())
+            return;
+
+        if (!dir.isDirectory())
+            return;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -MAX_DATA_AGE_MONTHS);
+        String dateString;
+        File[] files = dir.listFiles();
+        for (File file : files)
+            if (file.isDirectory()) {
+                cleanDir(file);
+            } else if ((dateString = FileUtil.parseDateFromWB(file)) != null) {
+                try {
+                    if (dateFormat.parse(dateString).compareTo(calendar.getTime()) < 0) {
+                        System.out.println("STATUS: Deleting " + dir.getName() + "/" + file.getName());
+                        file.delete();
+                    }
+                } catch (ParseException ignored){}
+            }
     }
 
     private String getEurasianPath() {

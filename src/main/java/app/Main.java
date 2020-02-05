@@ -27,7 +27,6 @@ public class Main {
     public static WeatherDataStore weatherDataStore;
 
     public static void main(String[] args) {
-
         //Setup sqlite database
         Connection connection = Database.getSQLiteConnection();
         if (connection == null) {
@@ -48,6 +47,7 @@ public class Main {
         //Setup weather data receiver
         weatherDataStore = new WeatherDataStore();
         weatherDataStore.touchDirectories();
+        weatherDataStore.cleanup();
         WeatherDataHandler handler = new WeatherDataHandler(weatherDataStore);
         WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
         receiver.addWeatherServerListener(handler);

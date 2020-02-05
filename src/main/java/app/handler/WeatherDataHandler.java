@@ -7,6 +7,8 @@ import app.net.WeatherClientListener;
 import app.net.WeatherDataListener;
 import app.store.WeatherDataStore;
 
+import java.util.Arrays;
+
 public class WeatherDataHandler implements WeatherClientListener, WeatherDataListener {
 
     private WeatherDataStore weatherDataStore;
@@ -29,6 +31,5 @@ public class WeatherDataHandler implements WeatherClientListener, WeatherDataLis
     @Override
     public void onAfricanData(AfricanData data) {
         weatherDataStore.saveAfricanData(data);
-        System.out.println(weatherDataStore.getLatestAfricanEntry(data.getStationID()));
     }
 }

@@ -92,4 +92,17 @@ public class FileUtil {
         }
     }
 
+    public static String parseDateFromWB(File file) {
+        if (file == null)
+            return null;
+
+        if (file.isDirectory())
+            return null;
+
+        if (!file.getName().contains("."))
+            return null;
+
+        return file.getName().substring(0, file.getName().lastIndexOf("."));
+    }
+
 }
