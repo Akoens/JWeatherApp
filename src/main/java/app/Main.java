@@ -68,12 +68,14 @@ public class Main {
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
         get(Path.Web.EXPORT, ExportController.serveExportPage);
-
         get(Path.Web.API_EXPORT, ApiController.handleApiExport);
+        get(Path.Web.EXPORT_AFRICA, ExportController.handleAfricaExport);
+        get(Path.Web.EXPORT_EURASIA, ExportController.handleEurasiaExport);
+        get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
+
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);
-        get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
 
         //Setup after-filters (called after each get/post)

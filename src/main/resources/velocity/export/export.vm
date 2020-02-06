@@ -5,7 +5,7 @@
 <div class="custom-container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Settings</h2>
+            <h2>Export</h2>
         </div>
     </div>
     <div class="row my-5">
@@ -14,24 +14,24 @@
                 <div class="card-body p-5">
                     <div class="form-group row my-4">
                         <div class="col-8">
-                            <h5 class="m-0">Download Eurasia weather stations</h5>
-                            <p class="m-0 sub-text font-weight-normal">Download the current data</p>
-                        </div>
-                        <div class="col-4" >
-                            <a id="eurasia" href="/export/eurasia.csv" class='btn btn-primary' download="EurasiaDownloadCSV" style="display: none;">Download</a>
+                            <h5 class="m-0">Download Eruasian CSV</h5>
+                            <p class="m-0 sub-text font-weight-normal">
+                                <a id="eurasia-download-enabled" style="display:none;" href="/export/eurasia/" download="eurasia.csv">Download <i class="far fa-download"></i></a>
+                                <span id="eurasia-download-disabled">Download <i class="far fa-download"></i></span>
+                            </p>
                         </div>
                     </div>
                     <div class="form-group row my-4">
                         <div class="col-8">
-                            <h5 class="m-0">Download Afrika weather stations</h5>
-                            <p class="m-0 sub-text font-weight-normal">Download the current data</p>
-                        </div>
-                        <div class="col-4">
-                            <a id="africa" href="/export/africa.csv" class='btn btn-primary' download="AfricaDownloadCSV" style="display: none;">Download</a>
+                            <h5 class="m-0">Download African CSV</h5>
+                            <p class="m-0 sub-text font-weight-normal">
+                                <a id="africa-download-enabled" style="display:none;" href="/export/africa/" download="africa.csv">Download <i class="far fa-download"></i></a>
+                                <span id="africa-download-disabled">Download <i class="far fa-download"></i></span>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <button name="download-button" class="btn btn-primary" onclick="downloadCsv()">Ready Download</button>
+                <button name="download-button" id="dl-button" class="btn btn-primary" onclick="prepareCSV()">Prepare CSV</button>
             </div>
         </div>
     </div>

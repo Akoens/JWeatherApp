@@ -5,14 +5,15 @@ import spark.*;
 import static app.Main.weatherDataStore;
 
 public class ApiController {
+
     public static Route handleApiExport = (Request request, Response response) -> {
-        response.status(4);
+        response.type("application/json");
         if (weatherDataStore.parseCSV()){
-            response.status(500);
-        }else{
             response.status(200);
+            return "{\"status\":\"Ok\",\"status_code\":200}";
         }
-        return null;
+        response.status(500);
+        return "{\"status\":\"Internal server error\",\"status_code\":500}";
     };
 
 }

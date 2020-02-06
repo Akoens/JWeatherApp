@@ -5,6 +5,9 @@ import app.model.EurasianData;
 import app.util.FileUtil;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -233,7 +236,7 @@ public class WeatherDataStore {
                 EurasianData eurasianData = EurasianData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
                 lines.add(
                         String.format(
-                            "%d,%tF,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%o,%.2f\r\n",
+                            "%d,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%o,%.2f\r\n",
                                 stationID,
                                 eurasianData.getDate(),
                                 eurasianData.getTemperature(),
@@ -309,7 +312,7 @@ public class WeatherDataStore {
                 AfricanData africanData = AfricanData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
                 lines.add(
                         String.format(
-                                "%d,%tF,%.2f\r\n",
+                                "%d,%s,%.2f\r\n",
                                 stationID,
                                 africanData.getDate(),
                                 africanData.getHeatIndex()
@@ -398,6 +401,14 @@ public class WeatherDataStore {
                 } catch (ParseException ignored){}
             }
         return cleaned;
+    }
+
+    public String getAfricanCSV() throws IOException {
+        return new String(Files.readAllBytes(Paths.get(getExportPath() + "\\africa.csv")), StandardCharsets.UTF_8);
+    }
+
+    public String getEurasianCSV() throws IOException {
+        return new String(Files.readAllBytes(Paths.get(getExportPath() + "\\eurasia.csv")), StandardCharsets.UTF_8);
     }
 
     private String getEurasianPath() {

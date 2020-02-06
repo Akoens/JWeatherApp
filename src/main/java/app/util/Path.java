@@ -10,9 +10,10 @@ public class Path {
         @Getter public static final String LOGOUT = "/logout/";
         @Getter public static final String SIGNUP = "/signup/";
         @Getter public static final String EXPORT = "/export/";
-        @Getter public static final String API = "/api/";
         @Getter public static final String FORBIDDEN = "/forbidden/";
-        @Getter public static final String API_EXPORT = "/export/eurasia";
+        @Getter public static final String API_EXPORT = "/api/export/";
+        @Getter public static final String EXPORT_AFRICA = "/export/africa/";
+        @Getter public static final String EXPORT_EURASIA = "/export/eurasia/";
     }
 
     public static class Template {
