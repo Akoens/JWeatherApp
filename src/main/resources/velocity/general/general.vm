@@ -1,6 +1,45 @@
 #parse("/velocity/layout.vm")
 #@mainLayout()
-<div class="custom-container">
-    <h1>Welcome to the Brunei Transporting Company</h1>
-</div>
+    <div class="general-container p-5">
+
+            <div class="row" style="width: 100%">
+                <div class="header col-md-12">
+                    <h2 class="mb-0">Welcome to JWeatherApp</h2>
+                    <p class="sub-text">By Brunei Transport Company</p>
+                </div>
+                <div class="content col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>This is a weather system designed for Brunei Transport Company</h4>
+                            <br>
+                            <p>Brunei Transporting Company came a long way from being just a transport company to become a leading door-to-door parcel delivery company in Brunei Darussalam.
+                                BTC is a member of the Brunei Freight Forwarders Association.</p>
+                            <br>
+                            <p>BTC began as a transporting company which now boasts a fleet of commercial vehicles including trucks, car transporters, prime movers, trailers and cranes. Through the experience we have acquired over the years as well as through achieving industrial contracts, we are able to provide the best solution for our customers’ transportation needs both locally and internationally.</p>
+                            <br>
+                            <p>This application provides us information about the weather at all places where BTS is operational. With this system, our drivers can see the temperature</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-white">
+                                            <h4>Current conditions</h4>
+                                        </div>
+                                        <div class="card-body p-5 text-center">
+                                            <h1>33 °C</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer col-md-12">
+                    <h2><a href="/" class="link">Continue to dashboard <i class="far fa-angle-right"></i></a></h2>
+                </div>
+            </div>
+
+    </div>
 #end

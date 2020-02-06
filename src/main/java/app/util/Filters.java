@@ -2,7 +2,6 @@ package app.util;
 
 import spark.*;
 import static app.util.RequestUtil.*;
-import static spark.Spark.halt;
 
 public class Filters {
 
@@ -14,17 +13,16 @@ public class Filters {
         }
     };
 
-    // Locale change can be initiated from any page
-    // The locale is extracted from the request and saved to the app.user's session
-    public static Filter handleLocaleChange = (Request request, Response response) -> {
-        if (getQueryLocale(request) != null) {
-            request.session().attribute("locale", getQueryLocale(request));
-            response.redirect(request.pathInfo());
-        }
-    };
 
-    public static Filter handleForbiddenAuthentication = (Request request, Response response) -> {
-        if((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1)){
+    public static Filter handleLoginAuthentication = (Request request, Response response) -> {
+        String pathInfo = request.pathInfo();
+        System.out.println(pathInfo);
+        request.session().attribute("authLevel", RequestUtil.removeSessionAttrAuthLevel(request));
+        if ((request.session().attribute("currentUser") == null) && !(request.pathInfo().equals(Path.Web.LOGIN) || request.pathInfo().equals(Path.Web.GENERAL))) {
+            request.session().attribute("loginRedirect", pathInfo);
+            response.redirect(Path.Web.LOGIN);
+        }
+        if((pathInfo.equals(Path.Web.INDEX) || pathInfo.equals(Path.Web.SETTINGS))&&((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1))){
             response.redirect(Path.Web.FORBIDDEN);
         }
     };

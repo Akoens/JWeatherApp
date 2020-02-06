@@ -20,11 +20,13 @@ public class UserController {
     }
 
     // This method doesn't do anything, it's just included as an example
-    public static void setPassword(String username, String oldPassword, String newPassword) {
-        if (authenticate(username, oldPassword)) {
-            String newSalt = BCrypt.gensalt();
-            String newHashedPassword = BCrypt.hashpw(newSalt, newPassword);
-            // Update the app.user salt and password
+    public static void setPassword(String email, String oldPassword, String newPassword) {
+        if (authenticate(email, oldPassword)) {
+            String newHashedPassword = generateHashedPassword(newPassword);
+            userStore.updateUserPassword(email ,newHashedPassword);
         }
     }
+
+    public static String generateHashedPassword(String password){ return  BCrypt.hashpw(password, BCrypt.gensalt());}
+
 }

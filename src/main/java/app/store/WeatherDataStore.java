@@ -7,6 +7,8 @@ import app.util.FileUtil;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -19,6 +21,8 @@ public class WeatherDataStore {
     private static final String DATABASE_FOLDER = "\\database";
     private static final String EURASIAN_DATABASE_FOLDER = "\\eurasia";
     private static final String AFRICAN_DATABASE_FOLDER = "\\africa";
+    private static final String EXPORT_DATABASE_FOLDER = "\\export";
+    private static final int MAX_DATA_AGE_MONTHS = 1;
 
     private SimpleDateFormat dateFormat;
     private SimpleDateFormat prefixFormat;
@@ -33,7 +37,8 @@ public class WeatherDataStore {
     public void touchDirectories() {
         touchDir(ROOT_PATH + DATABASE_FOLDER);
         touchDir(getEurasianPath());
-        touchDir(getEurasianPath());
+        touchDir(getAfricanPath());
+        touchDir(getExportPath());
     }
 
     private File touchDir(String path) {
@@ -70,14 +75,17 @@ public class WeatherDataStore {
             return null;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
             String lastLine = FileUtil.tail(file);
+
+            if (lastLine == null)
+                return null;
+
             return AfricanData.fromFileLine(
                     stationID,
-                    file.getName().substring(0, file.getName().lastIndexOf(".")),
+                    FileUtil.parseDateFromWB(file),
                     lastLine
             );
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
@@ -92,16 +100,226 @@ public class WeatherDataStore {
         if (!file.exists())
             return null;
 
+        String data = FileUtil.tail2(file, 60);
+        if (data == null)
+            return null;
+
+        String[] lines = data.split("\r\n");
+        ArrayList<AfricanData> dataList = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            String lastLine = "";
-            while ((line = reader.readLine()) != null)
-                lastLine = line;
-        } catch (IOException e) {
+            for (String line : lines) {
+                dataList.add(
+                        AfricanData.fromFileLine(
+                                stationID,
+                                FileUtil.parseDateFromWB(file),
+                                line
+                        )
+                );
+            }
+            return dataList.toArray(new AfricanData[]{});
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public EurasianData[] getEurasianDataByDay(int stationID, Date date) {
+        File dir = new File(getEurasianPath(stationID));
+        if (!dir.exists())
+            return null;
+
+        File file = new File(getEurasianPath(stationID) + "\\" + getWDFilePath(date));
+        if (!file.exists())
+            return null;
+
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while((line = reader.readLine()) != null)
+                lines.add(line);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ArrayList<EurasianData> dataList = new ArrayList<>();
+        try {
+            for (String line : lines) {
+                dataList.add(
+                        EurasianData.fromFileLine(
+                                stationID,
+                                FileUtil.parseDateFromWB(file),
+                                line
+                        )
+                );
+            }
+            return dataList.toArray(new EurasianData[]{});
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void parseCSV() {
+        try {
+            parseEurasianCSV();
+            parseAfricanCSV();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void parseEurasianCSV() throws IOException {
+        File dir = new File(getEurasianPath());
+        if (!dir.exists())
+            return;
+
+        if (!dir.isDirectory())
+            return;
+
+        File csv = new File(getExportPath() + "\\eurasia.csv");
+        if (csv.exists())
+            csv.delete();
+
+        csv.createNewFile();
+        FileWriter writer = new FileWriter(csv, true);
+        writer.write(
+                "\"station_id\"," +
+                        "\"date\"," +
+                        "\"temperature\"," +
+                        "\"dew_point\"," +
+                        "\"station_air_pressure\"," +
+                        "\"sea_level_air_pressure\"," +
+                        "\"visibility\"," +
+                        "\"wind_speed\"," +
+                        "\"downfall\"," +
+                        "\"snowfall\"," +
+                        "\"events\"," +
+                        "\"cloud_coverage\"\r\n"
+        );
+
+        File[] files = dir.listFiles();
+        for (File file : files)
+            if (file.isDirectory())
+                for (File dataFile : file.listFiles()) {
+                    try {
+                        int stationID = Integer.parseInt(file.getName());
+                        String[] lines = parseEurasianCSVLines(stationID, dataFile);
+                        if (lines != null)
+                            for (String line : lines)
+                                writer.write(line);
+                    } catch (NumberFormatException ignored) {
+                    }
+                }
+
+        writer.close();
+    }
+
+    private String[] parseEurasianCSVLines(int stationID, File file) {
+        if (file == null)
+            return null;
+
+        if (!file.exists())
+            return null;
+
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while((line = reader.readLine()) != null) {
+                EurasianData eurasianData = EurasianData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
+                lines.add(
+                        String.format(
+                            "%d,%tF,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%o,%.2f\r\n",
+                                stationID,
+                                eurasianData.getDate(),
+                                eurasianData.getTemperature(),
+                                eurasianData.getDewPoint(),
+                                eurasianData.getStationAirPressure(),
+                                eurasianData.getSeaLevelAirPressure(),
+                                eurasianData.getVisibility(),
+                                eurasianData.getWindSpeed(),
+                                eurasianData.getDownfall(),
+                                eurasianData.getSnowfall(),
+                                eurasianData.getEvents(),
+                                eurasianData.getCloudCoverage()
+
+                        )
+                );
+            }
+        } catch (NullPointerException | IOException | ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return lines.toArray(new String[]{});
+    }
+
+    private void parseAfricanCSV() throws IOException {
+        File dir = new File(getAfricanPath());
+        if (!dir.exists())
+            return;
+
+        if (!dir.isDirectory())
+            return;
+
+        File csv = new File(getExportPath() + "\\africa.csv");
+        if (csv.exists())
+            csv.delete();
+
+        csv.createNewFile();
+        FileWriter writer = new FileWriter(csv, true);
+        writer.write(
+                "\"station_id\"," +
+                        "\"date\"," +
+                        "\"heat_index\"\r\n"
+        );
+
+        File[] files = dir.listFiles();
+        for (File file : files)
+            if (file.isDirectory())
+                for (File dataFile : file.listFiles()) {
+                    try {
+                        int stationID = Integer.parseInt(file.getName());
+                        String[] lines = parseAfricanCSVLines(stationID, dataFile);
+                        if (lines != null)
+                            for (String line : lines)
+                                writer.write(line);
+                    } catch (NumberFormatException ignored) {
+                    }
+                }
+
+        writer.close();
+    }
+
+    private String[] parseAfricanCSVLines(int stationID, File file) {
+        if (file == null)
+            return null;
+
+        if (!file.exists())
+            return null;
+
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while((line = reader.readLine()) != null) {
+                AfricanData africanData = AfricanData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
+                lines.add(
+                        String.format(
+                                "%d,%tF,%.2f\r\n",
+                                stationID,
+                                africanData.getDate(),
+                                africanData.getHeatIndex()
+
+                        )
+                );
+            }
+        } catch (NullPointerException | IOException | ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return lines.toArray(new String[]{});
     }
 
     public void saveEurasianData(EurasianData data) {
@@ -143,6 +361,43 @@ public class WeatherDataStore {
         }
     }
 
+    public void cleanup() {
+        System.out.println("STATUS: Cleaning " + MAX_DATA_AGE_MONTHS + " month(s) old data");
+        int cleaned = cleanDir(new File(getEurasianPath()));
+        cleaned += cleanDir(new File(getAfricanPath()));
+        System.out.println("STATUS: " + cleaned + " item(s) removed");
+    }
+
+    private int cleanDir(File dir) {
+        if (dir == null)
+            return -1;
+
+        if (!dir.exists())
+            return -1;
+
+        if (!dir.isDirectory())
+            return -1;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -MAX_DATA_AGE_MONTHS);
+        String dateString;
+        int cleaned = 0;
+        File[] files = dir.listFiles();
+        for (File file : files)
+            if (file.isDirectory()) {
+                cleaned += cleanDir(file);
+            } else if ((dateString = FileUtil.parseDateFromWB(file)) != null) {
+                try {
+                    if (dateFormat.parse(dateString).compareTo(calendar.getTime()) < 0) {
+                        System.out.println("STATUS: Deleting " + dir.getName() + "/" + file.getName());
+                        file.delete();
+                        cleaned++;
+                    }
+                } catch (ParseException ignored){}
+            }
+        return cleaned;
+    }
+
     private String getEurasianPath() {
         return ROOT_PATH + DATABASE_FOLDER + EURASIAN_DATABASE_FOLDER;
     }
@@ -162,4 +417,9 @@ public class WeatherDataStore {
     private String getWDFilePath(Date date) {
         return dateFormat.format(date) + "." + DATA_EXT;
     }
+
+    private String getExportPath() {
+        return ROOT_PATH + DATABASE_FOLDER + EXPORT_DATABASE_FOLDER;
+    }
+
 }
