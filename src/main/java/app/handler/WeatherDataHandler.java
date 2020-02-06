@@ -7,6 +7,8 @@ import app.net.WeatherClientListener;
 import app.net.WeatherDataListener;
 import app.store.WeatherDataStore;
 
+import java.util.Arrays;
+
 public class WeatherDataHandler implements WeatherClientListener, WeatherDataListener {
 
     private WeatherDataStore weatherDataStore;

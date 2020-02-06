@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/animate.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 
@@ -43,35 +44,41 @@
                         <form method="post" action="$WebPath.getLOGOUT()">
                             <button class="btn btn-link nav-link" tabindex="-1" aria-disabled="false">Logout</button>
                         </form>
-                    </li>
-                #else
-                    <li class="nav-item">
-                        <a class="nav-link" href="$WebPath.getLOGIN()" tabindex="-1" aria-disabled="false">Login</a>
-                    </li>
-                #end
-            </ul>
-        </div>
-</nav>
+
+                        </li>
+                    #else
+                        <li class="nav-item">
+                            <a class="nav-link" href="$WebPath.getLOGIN()" tabindex="-1" aria-disabled="false">Login</a>
+                        </li>
+                    #end
+                </ul>
+            </div>
+    </nav>
 <nav class="sidebar shadow-sm">
     <div class="sidebar-brand p-4">
         <a><img src="/img/brunei-logo.jpg" alt="" height="70"></a>
     </div>
+        <ul class="list-unstyled my-4">
+            <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
+            <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
+        </ul>
+    </nav>
+</div>
 
-    <ul class="list-unstyled my-4">
-        <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
-        <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
-    </ul>
-</nav>
 <main>
     $bodyContent
 </main>
 <footer>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="/js/scripts.js"></script>
-
 <script src="/js/all.js"></script>
+
 </body>
 </html>
 #end
