@@ -53,6 +53,11 @@
     align-content: center;
 }
 
+.btn.btn-primary {
+    background: #ff253a;
+    border: 0;
+}
+
 .sub-text {
     color: rgba(161, 161, 161, 0.96);
 }

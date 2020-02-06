@@ -32,7 +32,7 @@
                     <h1>33 °C</h1>
                 </div>
             </div><br/><br/>
-            <div class="card shadow-sm">
+            <div class="card shadow-sm animated fadeInUp">
                 <div class="card-header bg-white">
                     <h4>History data</h4>
                 </div>
