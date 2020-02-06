@@ -8,9 +8,11 @@ public class Path {
         @Getter public static final String GENERAL = "/general/";
         @Getter public static final String LOGIN = "/login/";
         @Getter public static final String LOGOUT = "/logout/";
+        @Getter public static final String DETAILS = "/details/:stationID/";
         @Getter public static final String SIGNUP = "/signup/";
         @Getter public static final String SETTINGS = "/settings/";
         @Getter public static final String API = "/api/";
+        @Getter public static final String API_STATION = "/api/station/:continent/:stationID/:type/";
         @Getter public static final String FORBIDDEN = "/forbidden/";
     }
 
@@ -18,6 +20,7 @@ public class Path {
         public static final String INDEX = "/velocity/index/index.vm";
         public static final String GENERAL = "/velocity/general/general.vm";
         public static final String LOGIN = "/velocity/login/login.vm";
+        public static final String DETAILS = "/velocity/details/details.vm";
         public static final String SIGNUP = "/velocity/signup/signup.vm";
         public static final String SETTINGS = "/velocity/settings/settings.vm";
         public static final String API = "/velocity/api/api.vm";

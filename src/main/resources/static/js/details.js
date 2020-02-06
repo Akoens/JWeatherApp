@@ -1,6 +1,3 @@
-
-
-
 let count = document.getElementById('count');
 let dataset = [12, 19, 3, 5, 2, 3, 3];
 let labelset = ['T-60', 'T-50', 'T-40', 'T-30', 'T-20', 'T-10', 'T'];

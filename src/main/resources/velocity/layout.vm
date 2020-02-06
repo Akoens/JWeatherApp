@@ -55,7 +55,6 @@
             </div>
     </nav>
 <nav class="sidebar shadow-sm">
-  <div class="sidebar-content">    
     <div class="sidebar-brand p-4">
         <a><img src="/img/brunei-logo.jpg" alt="" height="70"></a>
     </div>
@@ -63,8 +62,7 @@
             <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
             <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
         </ul>
-    </nav>
-</div>
+</nav>
 #end
 
 #macro(mainLayout)
@@ -83,7 +81,7 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="/js/all.js"></script>
-
+$bodyContent
 </body>
 </html>
 #end

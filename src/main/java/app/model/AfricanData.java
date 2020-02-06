@@ -43,6 +43,14 @@ public class AfricanData {
         return new AfricanData(stationID, dateFormat.parse(fileName + " " + data[0]), Double.parseDouble(data[1]));
     }
 
+    public String toJSON() {
+        return "{" +
+                    "\"stationID\":" + stationID + "," +
+                    "\"date\":\"" + date + "\"," +
+                    String.format("\"heatIndex\":%.2f", heatIndex) +
+                '}';
+    }
+
     @Override
     public String toString() {
         return "AfricanData{" +
