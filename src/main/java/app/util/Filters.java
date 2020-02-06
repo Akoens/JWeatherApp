@@ -23,7 +23,7 @@ public class Filters {
             response.redirect(Path.Web.LOGIN);
         }
         if((pathInfo.equals(Path.Web.INDEX) || pathInfo.equals(Path.Web.SETTINGS))&&((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1))){
-            response.redirect(Path.Web.FORBIDDEN);
+            response.redirect(Path.Web.GENERAL);
         }
     };
 
