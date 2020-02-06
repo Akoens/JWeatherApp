@@ -17,6 +17,9 @@ import app.util.ViewUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -27,7 +30,6 @@ public class Main {
     public static WeatherDataStore weatherDataStore;
 
     public static void main(String[] args) {
-
         //Setup sqlite database
         Connection connection = Database.getSQLiteConnection();
         if (connection == null) {
@@ -48,6 +50,7 @@ public class Main {
         //Setup weather data receiver
         weatherDataStore = new WeatherDataStore();
         weatherDataStore.touchDirectories();
+        weatherDataStore.cleanup();
         WeatherDataHandler handler = new WeatherDataHandler(weatherDataStore);
         WeatherDataReceiver receiver = new WeatherDataReceiver(4433);
         receiver.addWeatherServerListener(handler);
