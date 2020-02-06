@@ -12,7 +12,7 @@ public class Path {
         @Getter public static final String EXPORT = "/export/";
         @Getter public static final String API = "/api/";
         @Getter public static final String FORBIDDEN = "/forbidden/";
-        @Getter public static final String EURASIA = "/export/eurasia";
+        @Getter public static final String API_EXPORT = "/export/eurasia";
     }
 
     public static class Template {
@@ -21,7 +21,6 @@ public class Path {
         public static final String LOGIN = "/velocity/login/login.vm";
         public static final String SIGNUP = "/velocity/signup/signup.vm";
         public static final String EXPORT = "/velocity/export/export.vm";
-        public static final String API = "/velocity/api/api.vm";
         public static final String NOT_FOUND = "/velocity/notFound.vm";
         public static final String FORBIDDEN = "/velocity/forbidden.vm";
     }

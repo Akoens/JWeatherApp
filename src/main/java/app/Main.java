@@ -1,13 +1,9 @@
 package app;
 
+import app.controller.*;
 import app.database.Database;
 import app.handler.WeatherDataHandler;
-import app.controller.GeneralController;
-import app.controller.IndexController;
-import app.controller.LoginController;
 import app.net.WeatherDataReceiver;
-import app.controller.ExportController;
-import app.controller.SignupController;
 import app.store.WeatherDataStore;
 import app.store.UserStore;
 import app.util.Filters;
@@ -71,9 +67,9 @@ public class Main {
         get(Path.Web.GENERAL, GeneralController.serveGeneralPage);
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
-        get(Path.Web.EXPORT, ExportController.serveSettingsPage);
-        get(Path.Web.EURASIA, ExportController.exportCSV);
+        get(Path.Web.EXPORT, ExportController.serveExportPage);
 
+        get(Path.Web.API_EXPORT, ApiController.handleApiExport);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);

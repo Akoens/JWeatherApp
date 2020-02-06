@@ -161,12 +161,14 @@ public class WeatherDataStore {
     }
 
 
-    public void parseCSV() {
+    public boolean parseCSV() {
         try {
             parseEurasianCSV();
             parseAfricanCSV();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

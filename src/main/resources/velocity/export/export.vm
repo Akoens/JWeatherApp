@@ -14,27 +14,29 @@
                 <div class="card-body p-5">
                     <div class="form-group row my-4">
                         <div class="col-8">
-                            <h5 class="m-0">Download Afrika weather stations</h5>
+                            <h5 class="m-0">Download Eurasia weather stations</h5>
                             <p class="m-0 sub-text font-weight-normal">Download the current data</p>
                         </div>
-                        <div class="col-4">
-                            <button class="btn btn-primary">Download</button>
+                        <div class="col-4" >
+                            <a id="eurasia" href="/export/eurasia.csv" class='btn btn-primary' download="EurasiaDownloadCSV" style="display: none;">Download</a>
                         </div>
                     </div>
                     <div class="form-group row my-4">
                         <div class="col-8">
-                            <h5 class="m-0">Download Eurasia weather stations</h5>
+                            <h5 class="m-0">Download Afrika weather stations</h5>
                             <p class="m-0 sub-text font-weight-normal">Download the current data</p>
                         </div>
                         <div class="col-4">
-                            <a href="$WebPath.getEURASIA()" class="btn btn-primary">Download</a>
+                            <a id="africa" href="/export/africa.csv" class='btn btn-primary' download="AfricaDownloadCSV" style="display: none;">Download</a>
                         </div>
                     </div>
                 </div>
+                <button name="download-button" class="btn btn-primary" onclick="downloadCsv()">Ready Download</button>
             </div>
         </div>
     </div>
 </div>
 #end
 #@scripts()
+    <script src="/js/export.js"></script>
 #end
