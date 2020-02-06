@@ -16,8 +16,6 @@ public class Filters {
 
     public static Filter handleLoginAuthentication = (Request request, Response response) -> {
         String pathInfo = request.pathInfo();
-        System.out.println(pathInfo);
-        request.session().attribute("authLevel", RequestUtil.removeSessionAttrAuthLevel(request));
         if ((request.session().attribute("currentUser") == null) && !(request.pathInfo().equals(Path.Web.LOGIN) || request.pathInfo().equals(Path.Web.GENERAL))) {
             request.session().attribute("loginRedirect", pathInfo);
             response.redirect(Path.Web.LOGIN);
