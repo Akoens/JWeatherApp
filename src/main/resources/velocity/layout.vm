@@ -31,10 +31,12 @@
                 </li>
             </ul>
             <ul class="ml-auto navbar-nav">
-                #if(($authLevel))
-                    <li class="nav-item">
-                        <a class="nav-link" href="$WebPath.getSIGNUP()" tabindex="-1" aria-disabled="false">Sign up</a>
-                    </li>
+                #if($authLevel)
+                    #if($authLevel == 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="$WebPath.getSIGNUP()" tabindex="-1" aria-disabled="false">Sign up</a>
+                        </li>
+                    #end
                 #end
                 #if($currentUser)
                     <li class="nav-item">

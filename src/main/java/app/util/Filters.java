@@ -17,11 +17,12 @@ public class Filters {
     public static Filter handleLoginAuthentication = (Request request, Response response) -> {
         String pathInfo = request.pathInfo();
         System.out.println(pathInfo);
+        request.session().attribute("authLevel", RequestUtil.removeSessionAttrAuthLevel(request));
         if ((request.session().attribute("currentUser") == null) && !(request.pathInfo().equals(Path.Web.LOGIN) || request.pathInfo().equals(Path.Web.GENERAL))) {
             request.session().attribute("loginRedirect", pathInfo);
             response.redirect(Path.Web.LOGIN);
         }
-        if((pathInfo.equals(Path.Web.INDEX))&&((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1))){
+        if((pathInfo.equals(Path.Web.INDEX) || pathInfo.equals(Path.Web.SETTINGS))&&((request.session().attribute("authLevel") == null) || ((int)request.session().attribute("authLevel") < 1))){
             response.redirect(Path.Web.FORBIDDEN);
         }
     };

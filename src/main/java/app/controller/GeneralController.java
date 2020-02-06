@@ -9,6 +9,8 @@ import spark.Route;
 import java.util.HashMap;
 import java.util.Map;
 
+import static app.util.RequestUtil.removeSessionAttrAuthLevel;
+
 public class GeneralController {
 
     public static Route serveGeneralPage = (Request request, Response response) -> {

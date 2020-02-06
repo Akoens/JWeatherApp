@@ -11,11 +11,17 @@
                     <h3 class="m-0">Login</h3>
                 </div>
                 #if($authenticationFailed)
-                    <p class="bad notification">Failed to login</p>
+                    <div class="alert-danger">
+                        <p class="bad notification">Failed to login</p>
+                    </div>
                 #elseif($authenticationSucceeded)
-                    <p class="good notification">You are now logged in as $currentUser</p>
+                    <div class="alert-success">
+                        <p class="good notification">You are now logged in as $currentUser</p>
+                    </div>
                 #elseif($loggedOut)
-                    <p class="notification">You are now logged out</p>
+                    <div class="alert-info">
+                        <p class="notification">You are now logged out</p>
+                    </div>
                 #end
                 <form method="post">
                     <div class="form-group">

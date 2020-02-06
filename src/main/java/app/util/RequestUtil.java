@@ -4,19 +4,23 @@ import spark.*;
 
 public class RequestUtil {
 
-    public static String getQueryEmail(Request request) {
-        return request.queryParams("email");
-    }
+    public static String getQueryEmail(Request request) { return request.queryParams("email").toLowerCase().trim(); }
+
+    public static int getQueryAuthLevel(Request request) {return  Integer.parseInt(request.queryParams("authLevel"));}
 
     public static String getQueryPassword(Request request) {
-        return request.queryParams("password");
+        return request.queryParams("password").trim();
     }
+
+    public static String getQueryConfirmPassword(Request request){return request.queryParams("confirmPassword");}
 
     public static String getSessionCurrentUser(Request request) {
         return request.session().attribute("currentUser");
     }
 
-    public static String getQueryPasswordConfirm(Request request){return request.queryParams("PasswordConfirm");}
+    public static int getSessionAuthLevel(Request request) {
+        return request.session().attribute("authLevel");
+    }
 
     public static String removeSessionSignupError(Request request){
         String authLevel = request.session().attribute("signupError");
@@ -36,8 +40,8 @@ public class RequestUtil {
         return loginRedirect;
     }
 
-    public static String removeSessionAttrAuthLevel(Request request) {
-        String authLevel = request.session().attribute("authLevel");
+    public static Integer removeSessionAttrAuthLevel(Request request) {
+        Integer authLevel = request.session().attribute("authLevel");
         request.session().removeAttribute("authLevel");
         return authLevel;
     }

@@ -5,7 +5,6 @@ import app.handler.WeatherDataHandler;
 import app.controller.GeneralController;
 import app.controller.IndexController;
 import app.controller.LoginController;
-import app.controller.ApiController;
 import app.net.WeatherDataReceiver;
 import app.controller.SettingsController;
 import app.controller.SignupController;
@@ -70,12 +69,10 @@ public class Main {
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
         get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
-        get(Path.Web.API, ApiController.serveApiPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);
-        post(Path.Web.API, ApiController.handleApi);
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
 

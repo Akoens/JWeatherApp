@@ -20,6 +20,7 @@ public class LoginController {
         Map<String, Object> model = new HashMap<>();
         if (!UserController.authenticate(getQueryEmail(request), getQueryPassword(request))) {
             model.put("authenticationFailed", true);
+            model.put("authLevel", removeSessionAttrAuthLevel(request));
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
         String userEmail = getQueryEmail(request);
@@ -27,6 +28,7 @@ public class LoginController {
         int authLevel = userStore.getUserByEmail(userEmail).getAuthLevel();
 
         model.put("authenticationSucceeded", true);
+        model.put("currentUser", userEmail);
         model.put("authLevel", authLevel);
 
         request.session().attribute("currentUser", userEmail);

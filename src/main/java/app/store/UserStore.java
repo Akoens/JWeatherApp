@@ -18,7 +18,6 @@ public class UserStore {
     public void createTables() throws SQLException {
         statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS \"Users\" (\"id\"INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\"email\" TEXT UNIQUE,\"hashed_password\" TEXT,\"auth_level\" INTEGER)");
-        statement.close();
     }
 
     /*
@@ -37,7 +36,6 @@ public class UserStore {
                     "(2, 'davidase@gmail.com', '$2a$10$e0MYzXyjpJS7Pd0RVvHwHe1HlCS4bZJ18JuywdEMLT83E1KDmUhCy', 1)," +
                     "(3, 'federico@gmail.com', '$2a$10$E3DgchtVry3qlYlzJCsyxeSK0fftK4v0ynetVCuDdxGVl1obL.ln2', 2)"
         );
-        statement.close();
     }
 
     public User getUserByEmail(String email) {
@@ -60,7 +58,6 @@ public class UserStore {
             while(result.next()){
                 emails.add(result.getString("email"));
             }
-            statement.close();
             return emails;
         } catch (SQLException e) {
             System.err.println("Failed to get all emails:" + e.getMessage());
@@ -93,9 +90,22 @@ public class UserStore {
         }
     }
 
+    //Update user
+    public void updateUserPassword(String email, String password){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Users SET hashedPassword=? WHERE email=?");
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, email);
+        }catch (SQLException e){
+            System.out.println("Update user password error:" + e.getMessage());
+        }
+
+    }
+
     public void close(){
         try {
             connection.close();
+            statement.close();
 
         } catch (SQLException e){
             System.err.println("Connection closing Error" + e.getMessage());
