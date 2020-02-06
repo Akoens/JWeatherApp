@@ -1,4 +1,6 @@
 #parse("/velocity/layout.vm")
+#@header()
+#end
 #@mainLayout()
 <div class="row justify-content-center align-items-center" style="height: 100vh">
     <div class="col-xl-6 col-sm-12">
@@ -43,4 +45,6 @@
         </div>
     </div>
 </div>
+#end
+#@scripts()
 #end

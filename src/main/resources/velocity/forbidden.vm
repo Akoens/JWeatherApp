@@ -1,6 +1,10 @@
 #parse("/velocity/layout.vm")
+#@header()
+#end
 #@mainLayout()
 <div class="custom-container">
     <h1>ERROR_403_FORBIDDEN</h1>
 </div>
+#end
+#@scripts()
 #end

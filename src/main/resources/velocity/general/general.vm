@@ -1,4 +1,6 @@
 #parse("/velocity/layout.vm")
+#@header()
+#end
 #@mainLayout()
     <div class="general-container p-5">
 
@@ -27,4 +29,6 @@
             </div>
 
     </div>
+#end
+#@scripts()
 #end
