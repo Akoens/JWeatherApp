@@ -12,6 +12,7 @@
 *.p12
 
 ./database/
+*.csv
 target/
 target/classes/app/
 *.db
