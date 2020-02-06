@@ -5,7 +5,6 @@ import app.handler.WeatherDataHandler;
 import app.controller.GeneralController;
 import app.controller.IndexController;
 import app.controller.LoginController;
-import app.controller.ApiController;
 import app.net.WeatherDataReceiver;
 import app.controller.SettingsController;
 import app.controller.SignupController;
@@ -64,11 +63,11 @@ public class Main {
 
         //Setup before-filters (called before each get/post)
         before("*", Filters.addTrailingSlashes);
-        before("*", Filters.handleLocaleChange);
 
         //Authentication filters for accessing these web pages
-        before(Path.Web.INDEX, Filters.handleForbiddenAuthentication);
-        before(Path.Web.SETTINGS, Filters.handleForbiddenAuthentication);
+        //before(Path.Web.INDEX, Filters.handleLoginAuthentication);
+        //before(Path.Web.SETTINGS, Filters.handleLoginAuthentication);
+        before("*", Filters.handleLoginAuthentication);
 
         //Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);
@@ -76,11 +75,10 @@ public class Main {
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
         get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
-        get(Path.Web.API, ApiController.serveApiPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
-        post(Path.Web.API, ApiController.handleApi);
+        post(Path.Web.SIGNUP, SignupController.handleSignupPost);
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
 

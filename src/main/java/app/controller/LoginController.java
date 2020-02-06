@@ -20,32 +20,31 @@ public class LoginController {
         Map<String, Object> model = new HashMap<>();
         if (!UserController.authenticate(getQueryEmail(request), getQueryPassword(request))) {
             model.put("authenticationFailed", true);
+            model.put("authLevel", removeSessionAttrAuthLevel(request));
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
-        model.put("authenticationSucceeded", true);
         String userEmail = getQueryEmail(request);
+        String loginRedirect = request.session().attribute("loginRedirect");
+        int authLevel = userStore.getUserByEmail(userEmail).getAuthLevel();
+
+        model.put("authenticationSucceeded", true);
+        model.put("currentUser", userEmail);
+        model.put("authLevel", authLevel);
+
         request.session().attribute("currentUser", userEmail);
-        request.session().attribute("authLevel", userStore.getUserByEmail(userEmail).getAuthLevel());
-        if (getQueryLoginRedirect(request) != null) {
-            response.redirect(getQueryLoginRedirect(request));
+        request.session().attribute("authLevel", authLevel);
+        if (loginRedirect != null) {
+            response.redirect(loginRedirect);
         }
         return ViewUtil.render(request, model, Path.Template.LOGIN);
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
         request.session().removeAttribute("currentUser");
+        request.session().removeAttribute("authLevel");
         request.session().attribute("loggedOut", true);
-        response.redirect(Path.Web.LOGOUT);
+        response.redirect(Path.Web.GENERAL);
         return null;
-    };
-
-    // The origin of the request (request.pathInfo()) is saved in the session so
-    // the app.user can be redirected back after app.login
-    public static void ensureUserIsLoggedIn(Request request, Response response) {
-        if (request.session().attribute("currentUser") == null) {
-            request.session().attribute("loginRedirect", request.pathInfo());
-            response.redirect(Path.Web.LOGIN);
-        }
     };
 
 }

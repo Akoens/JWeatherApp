@@ -6,3 +6,5 @@
 #* @vtlvariable name="authenticationSucceeded" type="java.lang.String" *#
 #* @vtlvariable name="loginRedirect" type="java.lang.String" *#
 #* @vtlvariable name="authLevel" type="java.lang.Integer" *#
+#* @vtlvariable name="signupError" type="java.lang.String" *#
+

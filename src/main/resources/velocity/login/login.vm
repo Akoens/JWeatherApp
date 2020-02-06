@@ -5,17 +5,23 @@
         <div class="card shadow">
             <div class="card-body p-5">
                 <div class="card-logo text-center">
-                    <img src="img/brunei-logo.jpg" alt="">
+                    <img src="/img/brunei-logo.jpg" alt="">
                 </div>
                 <div class="card-title my-3">
                     <h3 class="m-0">Login</h3>
                 </div>
                 #if($authenticationFailed)
-                    <p class="bad notification">Failed to login</p>
+                    <div class="alert-danger">
+                        <p class="bad notification">Failed to login</p>
+                    </div>
                 #elseif($authenticationSucceeded)
-                    <p class="good notification">You are now logged in as $currentUser</p>
+                    <div class="alert-success">
+                        <p class="good notification">You are now logged in as $currentUser</p>
+                    </div>
                 #elseif($loggedOut)
-                    <p class="notification">You are now logged out</p>
+                    <div class="alert-info">
+                        <p class="notification">You are now logged out</p>
+                    </div>
                 #end
                 <form method="post">
                     <div class="form-group">
@@ -31,7 +37,7 @@
 
                     </div>
                     <input type="submit" value="Login" class="btn btn-primary btn-block"><br>
-                    <small>Dont have an account yet? <a href="$WebPath.getSIGNUP()">Click here!</a></small>
+                    <small>For more information <a href="$WebPath.getGENERAL()">Click here!</a></small>
                 </form>
             </div>
         </div>
