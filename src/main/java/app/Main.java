@@ -78,6 +78,8 @@ public class Main {
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);
+        get(Path.Web.API_STATION, ApiController.handleStations);
+
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
 

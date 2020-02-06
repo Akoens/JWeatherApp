@@ -115,6 +115,37 @@ public class EurasianData {
         );
     }
 
+    public String toJSON() {
+        return String.format(
+                "{\"station_id\":%d,\n" +
+                "\"date\":\"%s\",\n" +
+                "\"temperature\":%.2f,\n" +
+                "\"dew_point\":%.2f,\n" +
+                "\"station_air_pressure\":%.2f,\n" +
+                "\"sea_level_air_pressure\":%.2f,\n" +
+                "\"visibility\":%.2f,\n" +
+                "\"wind_speed\":%.2f,\n" +
+                "\"downfall\":%.2f,\n" +
+                "\"snowfall\":%.2f,\n" +
+                "\"events\":%d,\n" +
+                "\"cloud_coverage\":%.2f,\n" +
+                "\"wind_direction\":%d}",
+                getStationID(),
+                getDate(),
+                getTemperature(),
+                getDewPoint(),
+                getStationAirPressure(),
+                getSeaLevelAirPressure(),
+                getVisibility(),
+                getWindSpeed(),
+                getDownfall(),
+                getSnowfall(),
+                getEvents(),
+                getCloudCoverage(),
+                getWindDirection()
+        );
+    }
+
     public String getStoreString() {
         return String.format(
                 "%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%d,%.2f,%d",
@@ -130,7 +161,6 @@ public class EurasianData {
                 getCloudCoverage(),
                 getWindDirection()
         );
-
     }
 
 }

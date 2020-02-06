@@ -12,6 +12,7 @@ public class Path {
         @Getter public static final String SIGNUP = "/signup/";
         @Getter public static final String SETTINGS = "/settings/";
         @Getter public static final String API = "/api/";
+        @Getter public static final String API_STATION = "/api/station/:continent/:stationID/:type/";
         @Getter public static final String FORBIDDEN = "/forbidden/";
     }
 
