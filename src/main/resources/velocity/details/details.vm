@@ -1,17 +1,8 @@
 #parse("/velocity/layout.vm")
 #@header()
 #end
-
 #@mainLayout()
 <div class="custom-container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Dashboard</h2>
-        </div>
-    </div>
-    <div class="row my-5">
-        
-    </div>
     <div class="row my-5">
         <div class="col-xl-9 col-md-12">
             <div class="card shadow-sm animated fadeInUp">
@@ -34,7 +25,7 @@
             </div><br/><br/>
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h4>History data</h4>
+                    <h4>Historical data</h4>
                 </div>
                 <div class="card-body p-5" style="max-height: 232px;overflow: auto;overflow-x: hidden;">
                     <ul id="history-list"></ul>
@@ -62,7 +53,7 @@
         </div>     
     </div>
 </div>
+<script src="/js/details.js"></script>
 #end
-
 #@scripts()
 #end

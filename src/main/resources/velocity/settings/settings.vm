@@ -1,4 +1,6 @@
 #parse("/velocity/layout.vm")
+#@header()
+#end
 #@mainLayout()
 <div class="custom-container">
     <div class="row">
@@ -24,4 +26,6 @@
         </div>
     </div>
 </div>
+#end
+#@scripts()
 #end

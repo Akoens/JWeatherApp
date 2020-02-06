@@ -1,4 +1,4 @@
-#macro(mainLayout)
+#macro(header)
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -65,9 +65,15 @@
         </ul>
     </nav>
 </div>
+#end
+
+#macro(mainLayout)
 <main>
     $bodyContent
 </main>
+#end
+
+#macro(scripts)
 <footer>
 </footer>
 
@@ -76,7 +82,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="/js/scripts.js"></script>
 <script src="/js/all.js"></script>
 
 </body>
