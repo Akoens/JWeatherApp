@@ -2,6 +2,7 @@
 #@header()
 #end
 #@mainLayout()
+<input type="hidden" value="$stationID"/>
 <div class="custom-container">
     <div class="row my-5">
         <div class="col-xl-9 col-md-12">
