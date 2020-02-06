@@ -72,13 +72,13 @@ public class Main {
         get(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
         get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
+        get(Path.Web.API_STATION, ApiController.handleStations);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);
-        get(Path.Web.API_STATION, ApiController.handleStations);
 
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
