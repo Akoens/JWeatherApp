@@ -1,5 +1,9 @@
 package app.model;
 
+import app.store.WeatherDataStore;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EurasianData {
@@ -85,6 +89,30 @@ public class EurasianData {
 
     public int getWindDirection() {
         return windDirection;
+    }
+
+    public static EurasianData fromFileLine(int stationID, String fileName, String line) throws ParseException {
+        String[] data = line.split(",");
+        if (data.length != 12)
+            return null;
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(WeatherDataStore.DATA_DATE_FORMAT + " " + WeatherDataStore.DATA_PREFIX_FORMAT);
+        return new EurasianData(
+                stationID, //stationID
+                dateFormat.parse(fileName + " " + data[0]), //date
+                Float.parseFloat(data[1]), //temperature
+                Float.parseFloat(data[2]), //dewPoint
+                Float.parseFloat(data[3]), //stationAirPressure
+                Float.parseFloat(data[4]), //seaLevelAirPressure
+                Float.parseFloat(data[5]), //visibility
+                Float.parseFloat(data[6]), //windspeed
+                Float.parseFloat(data[7]), //downfall
+                Float.parseFloat(data[8]), //snowfall
+                Byte.parseByte(data[9]), //events
+                Float.parseFloat(data[10]), //cloudCoverage
+                Integer.parseInt(data[11]) //windDirection
+
+        );
     }
 
     public String getStoreString() {
