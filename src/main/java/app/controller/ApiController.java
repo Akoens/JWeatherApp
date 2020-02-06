@@ -1,38 +1,25 @@
 package app.controller;
 
+
 import app.Main;
 import app.model.AfricanData;
 import app.model.EurasianData;
-import app.util.ViewUtil;
 import spark.*;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
-import app.util.Path;
+import java.util.Date;
+
+import static app.Main.weatherDataStore;
 
 public class ApiController {
 
-    public static Route handleApi = (Request request, Response response) -> {
-        File saveDir = new File("src/main/resources/static/api");
-
-
-        java.nio.file.Path tempFile = Files.createTempFile(saveDir.toPath(), "", "");
-
-        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-
-        try (InputStream input = request.raw().getPart("file").getInputStream()) { // getPart needs to use same "name" as input field in form
-            Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+    public static Route handleApiExport = (Request request, Response response) -> {
+        response.type("application/json");
+        if (weatherDataStore.parseCSV()){
+            response.status(200);
+            return "{\"status\":\"Ok\",\"status_code\":200}";
         }
-
-        logInfo(request, tempFile);
-        response.redirect(Path.Web.API);
-        return null;
-
-
+        response.status(500);
+        return "{\"status\":\"Internal server error\",\"status_code\":500}";
     };
 
     public static Route handleStations = (Request request, Response response) -> {
@@ -98,19 +85,5 @@ public class ApiController {
 
         return resultJSON;
     };
-
-    // methods used for logging
-    private static void logInfo(Request request, java.nio.file.Path tempFile) throws IOException, ServletException {
-        System.out.println("Uploaded file '" + getFileName(request.raw().getPart("file")) + "' saved as '" + tempFile.toString() + "'");
-    }
-
-    private static String getFileName(Part part) {
-        for (String cd : part.getHeader("content-disposition").split(";")) {
-            if (cd.trim().startsWith("filename")) {
-                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
-    }
 
 }

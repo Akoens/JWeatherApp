@@ -54,7 +54,7 @@
         </div>     
     </div>
 </div>
-<script src="/js/details.js"></script>
 #end
 #@scripts()
+<script src="/js/details.js"></script>
 #end

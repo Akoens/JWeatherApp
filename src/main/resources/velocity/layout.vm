@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/animate.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+    $bodyContent
 </head>
 
 <body style="background: #f9f9f9">
@@ -24,12 +25,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
             </ul>
             <ul class="ml-auto navbar-nav">
                 #if($authLevel)
@@ -41,7 +36,7 @@
                 #end
                 #if($currentUser)
                     <li class="nav-item">
-                        <form method="post" action="$WebPath.getLOGOUT()">
+                        <form method="post" action="$WebPath.getLOGOUT()" class="m-0">
                             <button class="btn btn-link nav-link" tabindex="-1" aria-disabled="false">Logout</button>
                         </form>
 
@@ -56,11 +51,11 @@
     </nav>
 <nav class="sidebar shadow-sm">
     <div class="sidebar-brand p-4">
-        <a><img src="/img/brunei-logo.jpg" alt="" height="70"></a>
+        <a href="/"><img src="/img/brunei-logo.jpg" alt="" height="70"></a>
     </div>
         <ul class="list-unstyled my-4">
             <li class="sidebar-item"><a href="$WebPath.getINDEX()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-tachometer-alt"></i></span> <span class="sidebar-text">Dashboard</span></a></li>
-            <li class="sidebar-item"><a href="$WebPath.getSETTINGS()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Settings</span></a></li>
+            <li class="sidebar-item"><a href="$WebPath.getEXPORT()" class="sidebar-link"><span class="sidebar-icon"><i class="far fa-cog"></i></span> <span class="sidebar-text">Export</span></a></li>
         </ul>
 </nav>
 #end

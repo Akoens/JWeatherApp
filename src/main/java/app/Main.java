@@ -12,9 +12,6 @@ import app.util.ViewUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -71,7 +68,11 @@ public class Main {
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
         get(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
-        get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
+        get(Path.Web.EXPORT, ExportController.serveExportPage);
+        get(Path.Web.API_EXPORT, ApiController.handleApiExport);
+        get(Path.Web.EXPORT_AFRICA, ExportController.handleAfricaExport);
+        get(Path.Web.EXPORT_EURASIA, ExportController.handleEurasiaExport);
+        get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get(Path.Web.API_STATION, ApiController.handleStations);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);

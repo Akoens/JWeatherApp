@@ -1,8 +1,0 @@
-#parse("/velocity/layout.vm")
-#@header()
-#end
-#@mainLayout()
-    test
-#end
-#@scripts()
-#end
