@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body p-5">
                 <div class="card-logo text-center">
-                    <img src="img/brunei-logo.jpg" alt="">
+                    <img src="/img/brunei-logo.jpg" alt="">
                 </div>
                 <div class="card-title my-3">
                     <h3 class="m-0">Login</h3>
@@ -31,7 +31,7 @@
 
                     </div>
                     <input type="submit" value="Login" class="btn btn-primary btn-block"><br>
-                    <small>Dont have an account yet? <a href="$WebPath.getSIGNUP()">Click here!</a></small>
+                    <small>For more information <a href="$WebPath.getGENERAL()">Click here!</a></small>
                 </form>
             </div>
         </div>

@@ -13,7 +13,7 @@
 
 <body style="background: #f9f9f9">
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-    <a class="navbar-brand" href="#"><a href="$WebPath.getINDEX()"></a>
+    <a class="navbar-brand" href=""><a href="$WebPath.getINDEX()"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,13 +24,18 @@
                     <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
             <ul class="ml-auto navbar-nav">
+                #if(($authLevel))
+                    <li class="nav-item">
+                        <a class="nav-link" href="$WebPath.getSIGNUP()" tabindex="-1" aria-disabled="false">Sign up</a>
+                    </li>
+                #end
                 #if($currentUser)
                     <li class="nav-item">
                         <form method="post" action="$WebPath.getLOGOUT()">
@@ -47,7 +52,7 @@
 </nav>
 <nav class="sidebar shadow-sm">
     <div class="sidebar-brand p-4">
-        <img src="/img/brunei-logo.jpg" alt="" height="70"></a>
+        <a><img src="/img/brunei-logo.jpg" alt="" height="70"></a>
     </div>
 
     <ul class="list-unstyled my-4">

@@ -5,28 +5,32 @@
         <div class="card shadow">
             <div class="card-body p-5">
                 <div class="card-logo text-center">
-                    <img src="img/brunei-logo.jpg" alt="">
+                    <img src="/img/brunei-logo.jpg" alt="">
                 </div>
                 <div class="card-title my-3">
                     <h3 class="m-0">Sign up</h3>
                     <p class="sub-text">Let's get started!</p>
                 </div>
-                <div class="form-group">
-                    <label for="email">Username</label>
-                    <input type="email" class="form-control" placeholder="Username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
-                    <!-- eventuelte error message? -->
-                    <small class="form-text text-muted">Your password must be 6 characters long.</small>
-                </div>
-                <div class="form-group">
-                    <!-- <label for="passwordConfirm">Confirm password</label> -->
-                    <input type="passwordConfirm" class="form-control" placeholder="Confirm password">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Sign up</button><br>
-                <small>Already have an account? <a href="$WebPath.getSIGNUP()">Click here!</a></small>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="" class="form-control" placeholder="Password">
+                        <!-- Error message -->
+                        #if($signupError)
+                            <small class="form-text text-muted">$signupError</small>
+                        #end
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordConfirm">Confirm password</label>
+                        <input type="passwordConfirm" name="passwordConfirm" class="form-control" placeholder="Confirm password">
+                    </div>
+                    <input type="submit" value="Sign up" class="btn btn-primary btn-block"><br>
+                    <small>Already have an account? <a href="$WebPath.getLOGIN()">Click here!</a></small>
+                </form>
             </div>
         </div>
     </div>

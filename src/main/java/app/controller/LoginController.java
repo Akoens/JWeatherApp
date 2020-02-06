@@ -22,18 +22,24 @@ public class LoginController {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
-        model.put("authenticationSucceeded", true);
         String userEmail = getQueryEmail(request);
+        String loginRedirect = request.session().attribute("loginRedirect");
+        int authLevel = userStore.getUserByEmail(userEmail).getAuthLevel();
+
+        model.put("authenticationSucceeded", true);
+        model.put("authLevel", authLevel);
+
         request.session().attribute("currentUser", userEmail);
-        request.session().attribute("authLevel", userStore.getUserByEmail(userEmail).getAuthLevel());
-        if (getQueryLoginRedirect(request) != null) {
-            response.redirect(getQueryLoginRedirect(request));
+        request.session().attribute("authLevel", authLevel);
+        if (loginRedirect != null) {
+            response.redirect(loginRedirect);
         }
         return ViewUtil.render(request, model, Path.Template.LOGIN);
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
         request.session().removeAttribute("currentUser");
+        request.session().removeAttribute("authLevel");
         request.session().attribute("loggedOut", true);
         response.redirect(Path.Web.GENERAL);
         return null;

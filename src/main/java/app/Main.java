@@ -58,7 +58,6 @@ public class Main {
 
         //Setup before-filters (called before each get/post)
         before("*", Filters.addTrailingSlashes);
-        before("*", Filters.handleLocaleChange);
 
         //Authentication filters for accessing these web pages
         //before(Path.Web.INDEX, Filters.handleLoginAuthentication);
@@ -75,6 +74,7 @@ public class Main {
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
+        post(Path.Web.SIGNUP, SignupController.handleSignupPost);
         post(Path.Web.API, ApiController.handleApi);
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);

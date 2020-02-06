@@ -4,14 +4,6 @@ import spark.*;
 
 public class RequestUtil {
 
-    public static String getQueryLocale(Request request) {
-        return request.queryParams("locale");
-    }
-
-    public static String getParamIsbn(Request request) {
-        return request.params("isbn");
-    }
-
     public static String getQueryEmail(Request request) {
         return request.queryParams("email");
     }
@@ -20,13 +12,16 @@ public class RequestUtil {
         return request.queryParams("password");
     }
 
-    public static String getQueryLoginRedirect(Request request) {
-        return request.queryParams("loginRedirect");
-    }
-
-
     public static String getSessionCurrentUser(Request request) {
         return request.session().attribute("currentUser");
+    }
+
+    public static String getQueryPasswordConfirm(Request request){return request.queryParams("PasswordConfirm");}
+
+    public static String removeSessionSignupError(Request request){
+        String authLevel = request.session().attribute("signupError");
+        request.session().removeAttribute("signupError");
+        return authLevel;
     }
 
     public static boolean removeSessionAttrLoggedOut(Request request) {
@@ -39,6 +34,12 @@ public class RequestUtil {
         String loginRedirect = request.session().attribute("loginRedirect");
         request.session().removeAttribute("loginRedirect");
         return loginRedirect;
+    }
+
+    public static String removeSessionAttrAuthLevel(Request request) {
+        String authLevel = request.session().attribute("authLevel");
+        request.session().removeAttribute("authLevel");
+        return authLevel;
     }
 
     public static boolean clientAcceptsHtml(Request request) {
