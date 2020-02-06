@@ -1,6 +1,9 @@
+body{
+    overflow-x: hidden;
+}
 .sidebar {
     height: 100%;
-    position: relative;
+    position: fixed;
     width: 250px;
     background: rgb(255,255,255);
     z-index: 1;
@@ -24,10 +27,6 @@
 
 .sub-text {
     color: #959595;
-}
-
-.sidebar-content {
-  position: fixed;
 }
 
 .general-container {
@@ -80,9 +79,16 @@
     z-index: 2;
 }
 
+.custom-map-container {
+    padding: 9vh 0px 0px 230px;
+    font-family: "Open Sans";
+    font-weight: 700;
+    z-index: 1;
+}
+
 #map {
     width: 100%;
-    height: 400px;
+    height: 82vh;
 }
 
 @media (max-width: 992px) {
@@ -109,6 +115,9 @@
         font-family: "Open Sans";
         font-weight: 700;
         z-index: 2;
+    }
+    .custom-map-container {
+        padding: 8vh 0px 0px 56px;
     }
 
     .navbar .navbar-collapse.show > .sidebar {

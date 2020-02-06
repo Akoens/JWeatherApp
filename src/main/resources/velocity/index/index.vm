@@ -3,21 +3,13 @@
 #end
 
 #@mainLayout()
-<div class="custom-container">
+<div class="custom-map-container">
     <div class="row">
-        <div class="col-sm-6">
-            <div class="card shadow-sm animated fadeInUp">
-                <div class="card-header bg-white">
-                    <h4>Select weatherstation</h4>
-                </div>
-                <div class="card-body">
-                    <div id="map"></div>
-                </div>
-            </div>
-            <div class="row my-5">
-                <div class="col-md-3">
-                </div>     
-            </div>
+        <div class="col-sm-12">
+          <h4 style="padding: 1.25rem 3.25rem 0">Select your weatherstation</h4>
+          <div class="card-body">
+            <div id="map"></div>
+          </div>
         </div>
     </div>
 </div>
