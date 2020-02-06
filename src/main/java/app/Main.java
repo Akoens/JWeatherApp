@@ -1,13 +1,9 @@
 package app;
 
+import app.controller.*;
 import app.database.Database;
 import app.handler.WeatherDataHandler;
-import app.controller.GeneralController;
-import app.controller.IndexController;
-import app.controller.LoginController;
 import app.net.WeatherDataReceiver;
-import app.controller.SettingsController;
-import app.controller.SignupController;
 import app.store.WeatherDataStore;
 import app.store.UserStore;
 import app.util.Filters;
@@ -73,11 +69,14 @@ public class Main {
         get(Path.Web.INDEX, IndexController.serveIndexPage);
         get(Path.Web.GENERAL, GeneralController.serveGeneralPage);
         get(Path.Web.LOGIN, LoginController.serveLoginPage);
+        get(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         get(Path.Web.SIGNUP, SignupController.serveSignupPage);
         get(Path.Web.SETTINGS, SettingsController.serveSettingsPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
+        post(Path.Web.LOGIN, LoginController.handleLoginPost);
+        post(Path.Web.DETAILS, DetailsController.serveDetailsPage);
         post(Path.Web.SIGNUP, SignupController.handleSignupPost);
         get(Path.Web.FORBIDDEN, ViewUtil.forbidden);
         get("*", ViewUtil.notFound);
