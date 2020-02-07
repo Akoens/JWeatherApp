@@ -1,0 +1,42 @@
+#parse("/velocity/layout.vm")
+#@header()
+#end
+#@mainLayout()
+<input type="hidden" name="stationID" id="stationID" value="$stationID"/>
+<input type="hidden" name="continent" id="continent" value="$continent"/>
+<input type="hidden" name="name" id="name" value="$name"/>
+<div class="custom-container">
+   <div class="col-xl-12 col-md-12">
+        <div class="card shadow-sm animated fadeInUp" id="card">
+            <div class="card-header bg-white">
+                <h4>Data this day for $name station, $country</h4>
+            </div>
+            <div class="card-body p-0 text-center">
+                <table class="table">
+                    <thead>
+                        <tr style="font-size:0.8em;">
+                            <th scope="col">Time</th>
+                            <th scope="col">Temperature</th>
+                            <th scope="col">Dew point</th>
+                            <th scope="col">Station air pressure</th>
+                            <th scope="col">Sea level air pressure</th>
+                            <th scope="col">Visibility</th>
+                            <th scope="col">Wind speed</th>
+                            <th scope="col">Downfall</th>
+                            <th scope="col">Snowfall</th>
+                            <th scope="col">Events</th>
+                            <th scope="col">Cloud coverage</th>
+                            <th scope="col">Wind direction</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-content">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>
+#end
+#@scripts()
+<script src="/js/details_eurasia.js"></script>
+#end

@@ -5,6 +5,7 @@ import app.store.WeatherDataStore;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class EurasianData {
 
@@ -116,7 +117,7 @@ public class EurasianData {
     }
 
     public String toJSON() {
-        return String.format(
+        return String.format(Locale.US,
                 "{\"station_id\":%d,\n" +
                 "\"date\":\"%s\",\n" +
                 "\"temperature\":%.2f,\n" +

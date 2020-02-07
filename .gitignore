@@ -12,7 +12,8 @@
 *.p12
 
 ./database/
-*.csv
+africa.csv
+eurasia.csv
 target/
 target/classes/app/
 *.db
