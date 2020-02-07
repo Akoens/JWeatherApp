@@ -36,7 +36,7 @@ public class LoginController {
         if (loginRedirect != null) {
             response.redirect(loginRedirect);
         }
-        return ViewUtil.render(request, model, Path.Template.INDEX);
+        return ViewUtil.render(request, model, Path.Template.GENERAL);
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {

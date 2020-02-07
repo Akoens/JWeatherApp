@@ -62,8 +62,7 @@ public class Main {
 
         //Authentication filters for accessing these web pages
         //before(Path.Web.INDEX, Filters.handleLoginAuthentication);
-        //before(Path.Web.SETTINGS, Filters.handleLoginAuthentication);
-        //before("*", Filters.handleLoginAuthentication);
+        before("*", Filters.handleLoginAuthentication);
 
         //Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);

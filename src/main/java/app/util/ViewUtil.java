@@ -13,8 +13,10 @@ public class ViewUtil {
     // The request is needed to check the app.user session for language settings
     // and to see if the app.user is logged in
     public static String render(Request request, Map<String, Object> model, String templatePath) {
+        if (model == null)
+            model = new HashMap<>();
         model.put("currentUser", getSessionCurrentUser(request));
-        int autLevel = removeSessionAttrAuthLevel(request);
+        Integer autLevel = removeSessionAttrAuthLevel(request);
         model.put("authLevel", autLevel);
         request.session().attribute("authLevel", autLevel);
         model.put("WebPath", Path.Web.class); // Access application URLs from templates
