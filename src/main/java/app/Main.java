@@ -12,6 +12,7 @@ import app.util.ViewUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Locale;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -22,6 +23,8 @@ public class Main {
     public static WeatherDataStore weatherDataStore;
 
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
+
         //Setup sqlite database
         Connection connection = Database.getSQLiteConnection();
         if (connection == null) {
@@ -60,7 +63,7 @@ public class Main {
         //Authentication filters for accessing these web pages
         //before(Path.Web.INDEX, Filters.handleLoginAuthentication);
         //before(Path.Web.SETTINGS, Filters.handleLoginAuthentication);
-        before("*", Filters.handleLoginAuthentication);
+        //before("*", Filters.handleLoginAuthentication);
 
         //Get and Post
         get(Path.Web.INDEX, IndexController.serveIndexPage);

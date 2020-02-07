@@ -3,11 +3,11 @@ var map = new mapboxgl.Map({
     container: 'map', // container id
     style: '/json/mapstyle.json', // stylesheet location
     center: [31.55, 31.1], // starting position
-    zoom: 7
+    zoom: 1
 });
 
 map.on('click', 'data', function(e) {
-	window.location = "/details/" + e.features[0].properties.id;
+	window.location = "/details/" + e.features[0].properties.Continent.toLowerCase() + "/" + e.features[0].properties.id;
 });
  
 // Change the cursor to a pointer when the mouse is over the places layer.

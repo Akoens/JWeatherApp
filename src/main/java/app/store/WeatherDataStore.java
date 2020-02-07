@@ -2,8 +2,13 @@ package app.store;
 
 import app.model.AfricanData;
 import app.model.EurasianData;
+import app.model.Station;
+import app.model.Stations;
 import app.util.FileUtil;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -30,11 +35,16 @@ public class WeatherDataStore {
     private SimpleDateFormat dateFormat;
     private SimpleDateFormat prefixFormat;
     private HashMap<Integer, AfricanData> africanDataCache;
+    private HashMap<Integer, Station> stations;
 
     public WeatherDataStore() {
         dateFormat = new SimpleDateFormat(DATA_DATE_FORMAT);
         prefixFormat = new SimpleDateFormat(DATA_PREFIX_FORMAT);
         africanDataCache = new HashMap<>();
+        stations = new HashMap<>();
+        for (Station station : loadStations().getStations()) {
+            this.stations.put(station.getStationID(), station);
+        }
     }
 
     public void touchDirectories() {
@@ -60,6 +70,17 @@ public class WeatherDataStore {
             }
             return file;
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Stations loadStations() {
+        try {
+            JAXBContext jaxb = JAXBContext.newInstance(Stations.class);
+            Unmarshaller unmarshaller = jaxb.createUnmarshaller();
+            return (Stations) unmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream("data/stations.xml"));
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
         return null;
@@ -107,23 +128,21 @@ public class WeatherDataStore {
         if (data == null)
             return null;
 
-        String[] lines = data.split("\r\n");
+        String[] lines = data.split("\n");
         ArrayList<AfricanData> dataList = new ArrayList<>();
-        try {
             for (String line : lines) {
-                dataList.add(
-                        AfricanData.fromFileLine(
-                                stationID,
-                                FileUtil.parseDateFromWB(file),
-                                line
-                        )
-                );
+                try {
+                    dataList.add(
+                            AfricanData.fromFileLine(
+                                    stationID,
+                                    FileUtil.parseDateFromWB(file),
+                                    line
+                            )
+                    );
+                } catch (Exception ignored) {
+                }
             }
-            return dataList.toArray(new AfricanData[]{});
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return dataList.toArray(new AfricanData[]{});
     }
 
     public EurasianData[] getEurasianDataByDay(int stationID, Date date) {
@@ -201,7 +220,7 @@ public class WeatherDataStore {
                         "\"downfall\"," +
                         "\"snowfall\"," +
                         "\"events\"," +
-                        "\"cloud_coverage\"\r\n"
+                        "\"cloud_coverage\"\n"
         );
 
         File[] files = dir.listFiles();
@@ -236,7 +255,7 @@ public class WeatherDataStore {
                 EurasianData eurasianData = EurasianData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
                 lines.add(
                         String.format(
-                            "%d,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%o,%.2f\r\n",
+                            "%d,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%o,%.2f\n",
                                 stationID,
                                 eurasianData.getDate(),
                                 eurasianData.getTemperature(),
@@ -277,7 +296,7 @@ public class WeatherDataStore {
         writer.write(
                 "\"station_id\"," +
                         "\"date\"," +
-                        "\"heat_index\"\r\n"
+                        "\"heat_index\"\n"
         );
 
         File[] files = dir.listFiles();
@@ -312,7 +331,7 @@ public class WeatherDataStore {
                 AfricanData africanData = AfricanData.fromFileLine(stationID, FileUtil.parseDateFromWB(file), line);
                 lines.add(
                         String.format(
-                                "%d,%s,%.2f\r\n",
+                                "%d,%s,%.2f\n",
                                 stationID,
                                 africanData.getDate(),
                                 africanData.getHeatIndex()
@@ -339,7 +358,7 @@ public class WeatherDataStore {
 
         try {
             FileWriter writer = new FileWriter(dataFile, true);
-            writer.write(prefixFormat.format(data.getDate()) + "," + data.getStoreString() + "\r\n");
+            writer.write(prefixFormat.format(data.getDate()) + "," + data.getStoreString() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -359,7 +378,7 @@ public class WeatherDataStore {
         try {
             africanDataCache.put(data.getStationID(), data);
             FileWriter writer = new FileWriter(dataFile, true);
-            writer.write(prefixFormat.format(data.getDate()) + "," + data.getStoreString() + "\r\n");
+            writer.write(prefixFormat.format(data.getDate()) + "," + data.getStoreString() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -409,6 +428,10 @@ public class WeatherDataStore {
 
     public String getEurasianCSV() throws IOException {
         return new String(Files.readAllBytes(Paths.get(getExportPath() + "\\eurasia.csv")), StandardCharsets.UTF_8);
+    }
+
+    public HashMap<Integer, Station> getStations() {
+        return stations;
     }
 
     private String getEurasianPath() {

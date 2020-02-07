@@ -5,6 +5,7 @@ import app.store.WeatherDataStore;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class AfricanData {
 
@@ -47,7 +48,7 @@ public class AfricanData {
         return "{" +
                     "\"stationID\":" + stationID + "," +
                     "\"date\":\"" + date + "\"," +
-                    String.format("\"heatIndex\":%.2f", heatIndex) +
+                    String.format(Locale.US, "\"heatIndex\":%.2f", heatIndex) +
                 '}';
     }
 
