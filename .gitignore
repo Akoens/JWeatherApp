@@ -85,3 +85,4 @@ fabric.properties
 .idea/vcs.xml
 .idea/artifacts/
 JWeatherApp.iml
+.idea/jarRepositories.xml
